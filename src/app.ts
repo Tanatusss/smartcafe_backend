@@ -12,5 +12,5 @@ app.use('/api',authRouter)
 // app.use()
 
 const port = envConfig.PORT;
-app.listen(()=> console.log(`server running on port: ${port}`))
+app.listen(port,()=> console.log(`server running on port: ${port}`))
 
