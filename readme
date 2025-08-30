@@ -1,0 +1,10 @@
+pnpm init
+pnpm add express
+git init
+.gitignore (node_modules)
+pnpm add -D typescript @types/express
+pnpm tsc --init
+pnpm add -D ts-node nodemon
+pnpm add dotenv
+pnpm add zod
+pnpm add @types/jsonwebtoken --dev
