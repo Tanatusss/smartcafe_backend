@@ -8,3 +8,7 @@ pnpm add -D ts-node nodemon
 pnpm add dotenv
 pnpm add zod
 pnpm add @types/jsonwebtoken --dev
+pnpm add prisma @prisma/client
+pnpm prisma init
+pnpm prisma migrate dev --name init
+pnpm prisma migrate dev --name ชื่อที่ต้องการตั้ง (สำหรับแก้ไขschema)
