@@ -1,8 +1,4 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
   provider = "prisma-client-js"
@@ -20,7 +16,7 @@ model User {
   email    String  @unique
   password String
   role     Role    @default(USER)
-  orders    Order[]
+  orders   Order[]
 }
 
 enum Role {
@@ -29,12 +25,11 @@ enum Role {
 }
 
 model MenuItem {
-  id          Int         @id @default(autoincrement())
-  name        String
-  description String
-  price       Float
-  imageUrl    String
-  orderitems   OrderItem[]
+  item_id    Int         @id @default(autoincrement())
+  name       String
+  price      Float
+  img        String
+  orderItems OrderItem[]
 }
 
 model Order {
@@ -55,12 +50,11 @@ enum OrderStatus {
 }
 
 model OrderItem {
-  id             Int   @id @default(autoincrement())
+  id             Int       @id @default(autoincrement())
   quantity       Int
   totalPriceItem Float
-
-  order      Order?    @relation(fields: [orderId], references: [id])
-  orderId    Int?
-  MenuItem   MenuItem? @relation(fields: [menuItemId], references: [id])
-  menuItemId Int?
+  menuItem       MenuItem? @relation(fields: [menuItemId], references: [item_id])
+  menuItemId     Int?
+  order          Order?    @relation(fields: [orderId], references: [id])
+  orderId        Int?
 }

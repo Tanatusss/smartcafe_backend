@@ -129,11 +129,10 @@ exports.Prisma.UserScalarFieldEnum = {
 };
 
 exports.Prisma.MenuItemScalarFieldEnum = {
-  id: 'id',
+  item_id: 'item_id',
   name: 'name',
-  description: 'description',
   price: 'price',
-  imageUrl: 'imageUrl'
+  img: 'img'
 };
 
 exports.Prisma.OrderScalarFieldEnum = {
@@ -149,8 +148,8 @@ exports.Prisma.OrderItemScalarFieldEnum = {
   id: 'id',
   quantity: 'quantity',
   totalPriceItem: 'totalPriceItem',
-  orderId: 'orderId',
-  menuItemId: 'menuItemId'
+  menuItemId: 'menuItemId',
+  orderId: 'orderId'
 };
 
 exports.Prisma.SortOrder = {
@@ -166,8 +165,7 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
 
 exports.Prisma.MenuItemOrderByRelevanceFieldEnum = {
   name: 'name',
-  description: 'description',
-  imageUrl: 'imageUrl'
+  img: 'img'
 };
 
 exports.Prisma.NullsOrder = {

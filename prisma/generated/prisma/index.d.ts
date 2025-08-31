@@ -1158,11 +1158,11 @@ export namespace Prisma {
    */
 
   export type MenuItemCountOutputType = {
-    orderitems: number
+    orderItems: number
   }
 
   export type MenuItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    orderitems?: boolean | MenuItemCountOutputTypeCountOrderitemsArgs
+    orderItems?: boolean | MenuItemCountOutputTypeCountOrderItemsArgs
   }
 
   // Custom InputTypes
@@ -1179,7 +1179,7 @@ export namespace Prisma {
   /**
    * MenuItemCountOutputType without action
    */
-  export type MenuItemCountOutputTypeCountOrderitemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MenuItemCountOutputTypeCountOrderItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderItemWhereInput
   }
 
@@ -2221,73 +2221,67 @@ export namespace Prisma {
   }
 
   export type MenuItemAvgAggregateOutputType = {
-    id: number | null
+    item_id: number | null
     price: number | null
   }
 
   export type MenuItemSumAggregateOutputType = {
-    id: number | null
+    item_id: number | null
     price: number | null
   }
 
   export type MenuItemMinAggregateOutputType = {
-    id: number | null
+    item_id: number | null
     name: string | null
-    description: string | null
     price: number | null
-    imageUrl: string | null
+    img: string | null
   }
 
   export type MenuItemMaxAggregateOutputType = {
-    id: number | null
+    item_id: number | null
     name: string | null
-    description: string | null
     price: number | null
-    imageUrl: string | null
+    img: string | null
   }
 
   export type MenuItemCountAggregateOutputType = {
-    id: number
+    item_id: number
     name: number
-    description: number
     price: number
-    imageUrl: number
+    img: number
     _all: number
   }
 
 
   export type MenuItemAvgAggregateInputType = {
-    id?: true
+    item_id?: true
     price?: true
   }
 
   export type MenuItemSumAggregateInputType = {
-    id?: true
+    item_id?: true
     price?: true
   }
 
   export type MenuItemMinAggregateInputType = {
-    id?: true
+    item_id?: true
     name?: true
-    description?: true
     price?: true
-    imageUrl?: true
+    img?: true
   }
 
   export type MenuItemMaxAggregateInputType = {
-    id?: true
+    item_id?: true
     name?: true
-    description?: true
     price?: true
-    imageUrl?: true
+    img?: true
   }
 
   export type MenuItemCountAggregateInputType = {
-    id?: true
+    item_id?: true
     name?: true
-    description?: true
     price?: true
-    imageUrl?: true
+    img?: true
     _all?: true
   }
 
@@ -2378,11 +2372,10 @@ export namespace Prisma {
   }
 
   export type MenuItemGroupByOutputType = {
-    id: number
+    item_id: number
     name: string
-    description: string
     price: number
-    imageUrl: string
+    img: string
     _count: MenuItemCountAggregateOutputType | null
     _avg: MenuItemAvgAggregateOutputType | null
     _sum: MenuItemSumAggregateOutputType | null
@@ -2405,42 +2398,39 @@ export namespace Prisma {
 
 
   export type MenuItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
+    item_id?: boolean
     name?: boolean
-    description?: boolean
     price?: boolean
-    imageUrl?: boolean
-    orderitems?: boolean | MenuItem$orderitemsArgs<ExtArgs>
+    img?: boolean
+    orderItems?: boolean | MenuItem$orderItemsArgs<ExtArgs>
     _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["menuItem"]>
 
 
 
   export type MenuItemSelectScalar = {
-    id?: boolean
+    item_id?: boolean
     name?: boolean
-    description?: boolean
     price?: boolean
-    imageUrl?: boolean
+    img?: boolean
   }
 
-  export type MenuItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "price" | "imageUrl", ExtArgs["result"]["menuItem"]>
+  export type MenuItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"item_id" | "name" | "price" | "img", ExtArgs["result"]["menuItem"]>
   export type MenuItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    orderitems?: boolean | MenuItem$orderitemsArgs<ExtArgs>
+    orderItems?: boolean | MenuItem$orderItemsArgs<ExtArgs>
     _count?: boolean | MenuItemCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $MenuItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "MenuItem"
     objects: {
-      orderitems: Prisma.$OrderItemPayload<ExtArgs>[]
+      orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
+      item_id: number
       name: string
-      description: string
       price: number
-      imageUrl: string
+      img: string
     }, ExtArgs["result"]["menuItem"]>
     composites: {}
   }
@@ -2524,8 +2514,8 @@ export namespace Prisma {
      * // Get first 10 MenuItems
      * const menuItems = await prisma.menuItem.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const menuItemWithIdOnly = await prisma.menuItem.findMany({ select: { id: true } })
+     * // Only select the `item_id`
+     * const menuItemWithItem_idOnly = await prisma.menuItem.findMany({ select: { item_id: true } })
      * 
      */
     findMany<T extends MenuItemFindManyArgs>(args?: SelectSubset<T, MenuItemFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -2781,7 +2771,7 @@ export namespace Prisma {
    */
   export interface Prisma__MenuItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    orderitems<T extends MenuItem$orderitemsArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$orderitemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    orderItems<T extends MenuItem$orderItemsArgs<ExtArgs> = {}>(args?: Subset<T, MenuItem$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2811,11 +2801,10 @@ export namespace Prisma {
    * Fields of the MenuItem model
    */
   interface MenuItemFieldRefs {
-    readonly id: FieldRef<"MenuItem", 'Int'>
+    readonly item_id: FieldRef<"MenuItem", 'Int'>
     readonly name: FieldRef<"MenuItem", 'String'>
-    readonly description: FieldRef<"MenuItem", 'String'>
     readonly price: FieldRef<"MenuItem", 'Float'>
-    readonly imageUrl: FieldRef<"MenuItem", 'String'>
+    readonly img: FieldRef<"MenuItem", 'String'>
   }
     
 
@@ -3159,9 +3148,9 @@ export namespace Prisma {
   }
 
   /**
-   * MenuItem.orderitems
+   * MenuItem.orderItems
    */
-  export type MenuItem$orderitemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type MenuItem$orderItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -4248,40 +4237,40 @@ export namespace Prisma {
     id: number | null
     quantity: number | null
     totalPriceItem: number | null
-    orderId: number | null
     menuItemId: number | null
+    orderId: number | null
   }
 
   export type OrderItemSumAggregateOutputType = {
     id: number | null
     quantity: number | null
     totalPriceItem: number | null
-    orderId: number | null
     menuItemId: number | null
+    orderId: number | null
   }
 
   export type OrderItemMinAggregateOutputType = {
     id: number | null
     quantity: number | null
     totalPriceItem: number | null
-    orderId: number | null
     menuItemId: number | null
+    orderId: number | null
   }
 
   export type OrderItemMaxAggregateOutputType = {
     id: number | null
     quantity: number | null
     totalPriceItem: number | null
-    orderId: number | null
     menuItemId: number | null
+    orderId: number | null
   }
 
   export type OrderItemCountAggregateOutputType = {
     id: number
     quantity: number
     totalPriceItem: number
-    orderId: number
     menuItemId: number
+    orderId: number
     _all: number
   }
 
@@ -4290,40 +4279,40 @@ export namespace Prisma {
     id?: true
     quantity?: true
     totalPriceItem?: true
-    orderId?: true
     menuItemId?: true
+    orderId?: true
   }
 
   export type OrderItemSumAggregateInputType = {
     id?: true
     quantity?: true
     totalPriceItem?: true
-    orderId?: true
     menuItemId?: true
+    orderId?: true
   }
 
   export type OrderItemMinAggregateInputType = {
     id?: true
     quantity?: true
     totalPriceItem?: true
-    orderId?: true
     menuItemId?: true
+    orderId?: true
   }
 
   export type OrderItemMaxAggregateInputType = {
     id?: true
     quantity?: true
     totalPriceItem?: true
-    orderId?: true
     menuItemId?: true
+    orderId?: true
   }
 
   export type OrderItemCountAggregateInputType = {
     id?: true
     quantity?: true
     totalPriceItem?: true
-    orderId?: true
     menuItemId?: true
+    orderId?: true
     _all?: true
   }
 
@@ -4417,8 +4406,8 @@ export namespace Prisma {
     id: number
     quantity: number
     totalPriceItem: number
-    orderId: number | null
     menuItemId: number | null
+    orderId: number | null
     _count: OrderItemCountAggregateOutputType | null
     _avg: OrderItemAvgAggregateOutputType | null
     _sum: OrderItemSumAggregateOutputType | null
@@ -4444,10 +4433,10 @@ export namespace Prisma {
     id?: boolean
     quantity?: boolean
     totalPriceItem?: boolean
-    orderId?: boolean
     menuItemId?: boolean
-    Order?: boolean | OrderItem$OrderArgs<ExtArgs>
-    MenuItem?: boolean | OrderItem$MenuItemArgs<ExtArgs>
+    orderId?: boolean
+    menuItem?: boolean | OrderItem$menuItemArgs<ExtArgs>
+    order?: boolean | OrderItem$orderArgs<ExtArgs>
   }, ExtArgs["result"]["orderItem"]>
 
 
@@ -4456,28 +4445,28 @@ export namespace Prisma {
     id?: boolean
     quantity?: boolean
     totalPriceItem?: boolean
-    orderId?: boolean
     menuItemId?: boolean
+    orderId?: boolean
   }
 
-  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quantity" | "totalPriceItem" | "orderId" | "menuItemId", ExtArgs["result"]["orderItem"]>
+  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quantity" | "totalPriceItem" | "menuItemId" | "orderId", ExtArgs["result"]["orderItem"]>
   export type OrderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    Order?: boolean | OrderItem$OrderArgs<ExtArgs>
-    MenuItem?: boolean | OrderItem$MenuItemArgs<ExtArgs>
+    menuItem?: boolean | OrderItem$menuItemArgs<ExtArgs>
+    order?: boolean | OrderItem$orderArgs<ExtArgs>
   }
 
   export type $OrderItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "OrderItem"
     objects: {
-      Order: Prisma.$OrderPayload<ExtArgs> | null
-      MenuItem: Prisma.$MenuItemPayload<ExtArgs> | null
+      menuItem: Prisma.$MenuItemPayload<ExtArgs> | null
+      order: Prisma.$OrderPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       quantity: number
       totalPriceItem: number
-      orderId: number | null
       menuItemId: number | null
+      orderId: number | null
     }, ExtArgs["result"]["orderItem"]>
     composites: {}
   }
@@ -4818,8 +4807,8 @@ export namespace Prisma {
    */
   export interface Prisma__OrderItemClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    Order<T extends OrderItem$OrderArgs<ExtArgs> = {}>(args?: Subset<T, OrderItem$OrderArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    MenuItem<T extends OrderItem$MenuItemArgs<ExtArgs> = {}>(args?: Subset<T, OrderItem$MenuItemArgs<ExtArgs>>): Prisma__MenuItemClient<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    menuItem<T extends OrderItem$menuItemArgs<ExtArgs> = {}>(args?: Subset<T, OrderItem$menuItemArgs<ExtArgs>>): Prisma__MenuItemClient<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    order<T extends OrderItem$orderArgs<ExtArgs> = {}>(args?: Subset<T, OrderItem$orderArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4852,8 +4841,8 @@ export namespace Prisma {
     readonly id: FieldRef<"OrderItem", 'Int'>
     readonly quantity: FieldRef<"OrderItem", 'Int'>
     readonly totalPriceItem: FieldRef<"OrderItem", 'Float'>
-    readonly orderId: FieldRef<"OrderItem", 'Int'>
     readonly menuItemId: FieldRef<"OrderItem", 'Int'>
+    readonly orderId: FieldRef<"OrderItem", 'Int'>
   }
     
 
@@ -5197,28 +5186,9 @@ export namespace Prisma {
   }
 
   /**
-   * OrderItem.Order
+   * OrderItem.menuItem
    */
-  export type OrderItem$OrderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Order
-     */
-    select?: OrderSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Order
-     */
-    omit?: OrderOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: OrderInclude<ExtArgs> | null
-    where?: OrderWhereInput
-  }
-
-  /**
-   * OrderItem.MenuItem
-   */
-  export type OrderItem$MenuItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderItem$menuItemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the MenuItem
      */
@@ -5232,6 +5202,25 @@ export namespace Prisma {
      */
     include?: MenuItemInclude<ExtArgs> | null
     where?: MenuItemWhereInput
+  }
+
+  /**
+   * OrderItem.order
+   */
+  export type OrderItem$orderArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Order
+     */
+    select?: OrderSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Order
+     */
+    omit?: OrderOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderInclude<ExtArgs> | null
+    where?: OrderWhereInput
   }
 
   /**
@@ -5279,11 +5268,10 @@ export namespace Prisma {
 
 
   export const MenuItemScalarFieldEnum: {
-    id: 'id',
+    item_id: 'item_id',
     name: 'name',
-    description: 'description',
     price: 'price',
-    imageUrl: 'imageUrl'
+    img: 'img'
   };
 
   export type MenuItemScalarFieldEnum = (typeof MenuItemScalarFieldEnum)[keyof typeof MenuItemScalarFieldEnum]
@@ -5305,8 +5293,8 @@ export namespace Prisma {
     id: 'id',
     quantity: 'quantity',
     totalPriceItem: 'totalPriceItem',
-    orderId: 'orderId',
-    menuItemId: 'menuItemId'
+    menuItemId: 'menuItemId',
+    orderId: 'orderId'
   };
 
   export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
@@ -5331,8 +5319,7 @@ export namespace Prisma {
 
   export const MenuItemOrderByRelevanceFieldEnum: {
     name: 'name',
-    description: 'description',
-    imageUrl: 'imageUrl'
+    img: 'img'
   };
 
   export type MenuItemOrderByRelevanceFieldEnum = (typeof MenuItemOrderByRelevanceFieldEnum)[keyof typeof MenuItemOrderByRelevanceFieldEnum]
@@ -5458,42 +5445,38 @@ export namespace Prisma {
     AND?: MenuItemWhereInput | MenuItemWhereInput[]
     OR?: MenuItemWhereInput[]
     NOT?: MenuItemWhereInput | MenuItemWhereInput[]
-    id?: IntFilter<"MenuItem"> | number
+    item_id?: IntFilter<"MenuItem"> | number
     name?: StringFilter<"MenuItem"> | string
-    description?: StringFilter<"MenuItem"> | string
     price?: FloatFilter<"MenuItem"> | number
-    imageUrl?: StringFilter<"MenuItem"> | string
-    orderitems?: OrderItemListRelationFilter
+    img?: StringFilter<"MenuItem"> | string
+    orderItems?: OrderItemListRelationFilter
   }
 
   export type MenuItemOrderByWithRelationInput = {
-    id?: SortOrder
+    item_id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     price?: SortOrder
-    imageUrl?: SortOrder
-    orderitems?: OrderItemOrderByRelationAggregateInput
+    img?: SortOrder
+    orderItems?: OrderItemOrderByRelationAggregateInput
     _relevance?: MenuItemOrderByRelevanceInput
   }
 
   export type MenuItemWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    item_id?: number
     AND?: MenuItemWhereInput | MenuItemWhereInput[]
     OR?: MenuItemWhereInput[]
     NOT?: MenuItemWhereInput | MenuItemWhereInput[]
     name?: StringFilter<"MenuItem"> | string
-    description?: StringFilter<"MenuItem"> | string
     price?: FloatFilter<"MenuItem"> | number
-    imageUrl?: StringFilter<"MenuItem"> | string
-    orderitems?: OrderItemListRelationFilter
-  }, "id">
+    img?: StringFilter<"MenuItem"> | string
+    orderItems?: OrderItemListRelationFilter
+  }, "item_id">
 
   export type MenuItemOrderByWithAggregationInput = {
-    id?: SortOrder
+    item_id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     price?: SortOrder
-    imageUrl?: SortOrder
+    img?: SortOrder
     _count?: MenuItemCountOrderByAggregateInput
     _avg?: MenuItemAvgOrderByAggregateInput
     _max?: MenuItemMaxOrderByAggregateInput
@@ -5505,11 +5488,10 @@ export namespace Prisma {
     AND?: MenuItemScalarWhereWithAggregatesInput | MenuItemScalarWhereWithAggregatesInput[]
     OR?: MenuItemScalarWhereWithAggregatesInput[]
     NOT?: MenuItemScalarWhereWithAggregatesInput | MenuItemScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"MenuItem"> | number
+    item_id?: IntWithAggregatesFilter<"MenuItem"> | number
     name?: StringWithAggregatesFilter<"MenuItem"> | string
-    description?: StringWithAggregatesFilter<"MenuItem"> | string
     price?: FloatWithAggregatesFilter<"MenuItem"> | number
-    imageUrl?: StringWithAggregatesFilter<"MenuItem"> | string
+    img?: StringWithAggregatesFilter<"MenuItem"> | string
   }
 
   export type OrderWhereInput = {
@@ -5584,20 +5566,20 @@ export namespace Prisma {
     id?: IntFilter<"OrderItem"> | number
     quantity?: IntFilter<"OrderItem"> | number
     totalPriceItem?: FloatFilter<"OrderItem"> | number
-    orderId?: IntNullableFilter<"OrderItem"> | number | null
     menuItemId?: IntNullableFilter<"OrderItem"> | number | null
-    Order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
-    MenuItem?: XOR<MenuItemNullableScalarRelationFilter, MenuItemWhereInput> | null
+    orderId?: IntNullableFilter<"OrderItem"> | number | null
+    menuItem?: XOR<MenuItemNullableScalarRelationFilter, MenuItemWhereInput> | null
+    order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
   }
 
   export type OrderItemOrderByWithRelationInput = {
     id?: SortOrder
     quantity?: SortOrder
     totalPriceItem?: SortOrder
-    orderId?: SortOrderInput | SortOrder
     menuItemId?: SortOrderInput | SortOrder
-    Order?: OrderOrderByWithRelationInput
-    MenuItem?: MenuItemOrderByWithRelationInput
+    orderId?: SortOrderInput | SortOrder
+    menuItem?: MenuItemOrderByWithRelationInput
+    order?: OrderOrderByWithRelationInput
   }
 
   export type OrderItemWhereUniqueInput = Prisma.AtLeast<{
@@ -5607,18 +5589,18 @@ export namespace Prisma {
     NOT?: OrderItemWhereInput | OrderItemWhereInput[]
     quantity?: IntFilter<"OrderItem"> | number
     totalPriceItem?: FloatFilter<"OrderItem"> | number
-    orderId?: IntNullableFilter<"OrderItem"> | number | null
     menuItemId?: IntNullableFilter<"OrderItem"> | number | null
-    Order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
-    MenuItem?: XOR<MenuItemNullableScalarRelationFilter, MenuItemWhereInput> | null
+    orderId?: IntNullableFilter<"OrderItem"> | number | null
+    menuItem?: XOR<MenuItemNullableScalarRelationFilter, MenuItemWhereInput> | null
+    order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
   }, "id">
 
   export type OrderItemOrderByWithAggregationInput = {
     id?: SortOrder
     quantity?: SortOrder
     totalPriceItem?: SortOrder
-    orderId?: SortOrderInput | SortOrder
     menuItemId?: SortOrderInput | SortOrder
+    orderId?: SortOrderInput | SortOrder
     _count?: OrderItemCountOrderByAggregateInput
     _avg?: OrderItemAvgOrderByAggregateInput
     _max?: OrderItemMaxOrderByAggregateInput
@@ -5633,8 +5615,8 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"OrderItem"> | number
     quantity?: IntWithAggregatesFilter<"OrderItem"> | number
     totalPriceItem?: FloatWithAggregatesFilter<"OrderItem"> | number
-    orderId?: IntNullableWithAggregatesFilter<"OrderItem"> | number | null
     menuItemId?: IntNullableWithAggregatesFilter<"OrderItem"> | number | null
+    orderId?: IntNullableWithAggregatesFilter<"OrderItem"> | number | null
   }
 
   export type UserCreateInput = {
@@ -5696,59 +5678,52 @@ export namespace Prisma {
 
   export type MenuItemCreateInput = {
     name: string
-    description: string
     price: number
-    imageUrl: string
-    orderitems?: OrderItemCreateNestedManyWithoutMenuItemInput
+    img: string
+    orderItems?: OrderItemCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUncheckedCreateInput = {
-    id?: number
+    item_id?: number
     name: string
-    description: string
     price: number
-    imageUrl: string
-    orderitems?: OrderItemUncheckedCreateNestedManyWithoutMenuItemInput
+    img: string
+    orderItems?: OrderItemUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    orderitems?: OrderItemUpdateManyWithoutMenuItemNestedInput
+    img?: StringFieldUpdateOperationsInput | string
+    orderItems?: OrderItemUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    item_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    imageUrl?: StringFieldUpdateOperationsInput | string
-    orderitems?: OrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
+    img?: StringFieldUpdateOperationsInput | string
+    orderItems?: OrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
   }
 
   export type MenuItemCreateManyInput = {
-    id?: number
+    item_id?: number
     name: string
-    description: string
     price: number
-    imageUrl: string
+    img: string
   }
 
   export type MenuItemUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    img?: StringFieldUpdateOperationsInput | string
   }
 
   export type MenuItemUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    item_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
     price?: FloatFieldUpdateOperationsInput | number
-    imageUrl?: StringFieldUpdateOperationsInput | string
+    img?: StringFieldUpdateOperationsInput | string
   }
 
   export type OrderCreateInput = {
@@ -5817,39 +5792,39 @@ export namespace Prisma {
   export type OrderItemCreateInput = {
     quantity: number
     totalPriceItem: number
-    Order?: OrderCreateNestedOneWithoutOrderitemInput
-    MenuItem?: MenuItemCreateNestedOneWithoutOrderitemsInput
+    menuItem?: MenuItemCreateNestedOneWithoutOrderItemsInput
+    order?: OrderCreateNestedOneWithoutOrderitemInput
   }
 
   export type OrderItemUncheckedCreateInput = {
     id?: number
     quantity: number
     totalPriceItem: number
-    orderId?: number | null
     menuItemId?: number | null
+    orderId?: number | null
   }
 
   export type OrderItemUpdateInput = {
     quantity?: IntFieldUpdateOperationsInput | number
     totalPriceItem?: FloatFieldUpdateOperationsInput | number
-    Order?: OrderUpdateOneWithoutOrderitemNestedInput
-    MenuItem?: MenuItemUpdateOneWithoutOrderitemsNestedInput
+    menuItem?: MenuItemUpdateOneWithoutOrderItemsNestedInput
+    order?: OrderUpdateOneWithoutOrderitemNestedInput
   }
 
   export type OrderItemUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     totalPriceItem?: FloatFieldUpdateOperationsInput | number
-    orderId?: NullableIntFieldUpdateOperationsInput | number | null
     menuItemId?: NullableIntFieldUpdateOperationsInput | number | null
+    orderId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type OrderItemCreateManyInput = {
     id?: number
     quantity: number
     totalPriceItem: number
-    orderId?: number | null
     menuItemId?: number | null
+    orderId?: number | null
   }
 
   export type OrderItemUpdateManyMutationInput = {
@@ -5861,8 +5836,8 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     quantity?: IntFieldUpdateOperationsInput | number
     totalPriceItem?: FloatFieldUpdateOperationsInput | number
-    orderId?: NullableIntFieldUpdateOperationsInput | number | null
     menuItemId?: NullableIntFieldUpdateOperationsInput | number | null
+    orderId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -6018,36 +5993,33 @@ export namespace Prisma {
   }
 
   export type MenuItemCountOrderByAggregateInput = {
-    id?: SortOrder
+    item_id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     price?: SortOrder
-    imageUrl?: SortOrder
+    img?: SortOrder
   }
 
   export type MenuItemAvgOrderByAggregateInput = {
-    id?: SortOrder
+    item_id?: SortOrder
     price?: SortOrder
   }
 
   export type MenuItemMaxOrderByAggregateInput = {
-    id?: SortOrder
+    item_id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     price?: SortOrder
-    imageUrl?: SortOrder
+    img?: SortOrder
   }
 
   export type MenuItemMinOrderByAggregateInput = {
-    id?: SortOrder
+    item_id?: SortOrder
     name?: SortOrder
-    description?: SortOrder
     price?: SortOrder
-    imageUrl?: SortOrder
+    img?: SortOrder
   }
 
   export type MenuItemSumOrderByAggregateInput = {
-    id?: SortOrder
+    item_id?: SortOrder
     price?: SortOrder
   }
 
@@ -6210,54 +6182,54 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
-  export type OrderNullableScalarRelationFilter = {
-    is?: OrderWhereInput | null
-    isNot?: OrderWhereInput | null
-  }
-
   export type MenuItemNullableScalarRelationFilter = {
     is?: MenuItemWhereInput | null
     isNot?: MenuItemWhereInput | null
+  }
+
+  export type OrderNullableScalarRelationFilter = {
+    is?: OrderWhereInput | null
+    isNot?: OrderWhereInput | null
   }
 
   export type OrderItemCountOrderByAggregateInput = {
     id?: SortOrder
     quantity?: SortOrder
     totalPriceItem?: SortOrder
-    orderId?: SortOrder
     menuItemId?: SortOrder
+    orderId?: SortOrder
   }
 
   export type OrderItemAvgOrderByAggregateInput = {
     id?: SortOrder
     quantity?: SortOrder
     totalPriceItem?: SortOrder
-    orderId?: SortOrder
     menuItemId?: SortOrder
+    orderId?: SortOrder
   }
 
   export type OrderItemMaxOrderByAggregateInput = {
     id?: SortOrder
     quantity?: SortOrder
     totalPriceItem?: SortOrder
-    orderId?: SortOrder
     menuItemId?: SortOrder
+    orderId?: SortOrder
   }
 
   export type OrderItemMinOrderByAggregateInput = {
     id?: SortOrder
     quantity?: SortOrder
     totalPriceItem?: SortOrder
-    orderId?: SortOrder
     menuItemId?: SortOrder
+    orderId?: SortOrder
   }
 
   export type OrderItemSumOrderByAggregateInput = {
     id?: SortOrder
     quantity?: SortOrder
     totalPriceItem?: SortOrder
-    orderId?: SortOrder
     menuItemId?: SortOrder
+    orderId?: SortOrder
   }
 
   export type OrderCreateNestedManyWithoutUserInput = {
@@ -6446,16 +6418,26 @@ export namespace Prisma {
     deleteMany?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
   }
 
+  export type MenuItemCreateNestedOneWithoutOrderItemsInput = {
+    create?: XOR<MenuItemCreateWithoutOrderItemsInput, MenuItemUncheckedCreateWithoutOrderItemsInput>
+    connectOrCreate?: MenuItemCreateOrConnectWithoutOrderItemsInput
+    connect?: MenuItemWhereUniqueInput
+  }
+
   export type OrderCreateNestedOneWithoutOrderitemInput = {
     create?: XOR<OrderCreateWithoutOrderitemInput, OrderUncheckedCreateWithoutOrderitemInput>
     connectOrCreate?: OrderCreateOrConnectWithoutOrderitemInput
     connect?: OrderWhereUniqueInput
   }
 
-  export type MenuItemCreateNestedOneWithoutOrderitemsInput = {
-    create?: XOR<MenuItemCreateWithoutOrderitemsInput, MenuItemUncheckedCreateWithoutOrderitemsInput>
-    connectOrCreate?: MenuItemCreateOrConnectWithoutOrderitemsInput
+  export type MenuItemUpdateOneWithoutOrderItemsNestedInput = {
+    create?: XOR<MenuItemCreateWithoutOrderItemsInput, MenuItemUncheckedCreateWithoutOrderItemsInput>
+    connectOrCreate?: MenuItemCreateOrConnectWithoutOrderItemsInput
+    upsert?: MenuItemUpsertWithoutOrderItemsInput
+    disconnect?: MenuItemWhereInput | boolean
+    delete?: MenuItemWhereInput | boolean
     connect?: MenuItemWhereUniqueInput
+    update?: XOR<XOR<MenuItemUpdateToOneWithWhereWithoutOrderItemsInput, MenuItemUpdateWithoutOrderItemsInput>, MenuItemUncheckedUpdateWithoutOrderItemsInput>
   }
 
   export type OrderUpdateOneWithoutOrderitemNestedInput = {
@@ -6466,16 +6448,6 @@ export namespace Prisma {
     delete?: OrderWhereInput | boolean
     connect?: OrderWhereUniqueInput
     update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutOrderitemInput, OrderUpdateWithoutOrderitemInput>, OrderUncheckedUpdateWithoutOrderitemInput>
-  }
-
-  export type MenuItemUpdateOneWithoutOrderitemsNestedInput = {
-    create?: XOR<MenuItemCreateWithoutOrderitemsInput, MenuItemUncheckedCreateWithoutOrderitemsInput>
-    connectOrCreate?: MenuItemCreateOrConnectWithoutOrderitemsInput
-    upsert?: MenuItemUpsertWithoutOrderitemsInput
-    disconnect?: MenuItemWhereInput | boolean
-    delete?: MenuItemWhereInput | boolean
-    connect?: MenuItemWhereUniqueInput
-    update?: XOR<XOR<MenuItemUpdateToOneWithWhereWithoutOrderitemsInput, MenuItemUpdateWithoutOrderitemsInput>, MenuItemUncheckedUpdateWithoutOrderitemsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6745,7 +6717,7 @@ export namespace Prisma {
   export type OrderItemCreateWithoutMenuItemInput = {
     quantity: number
     totalPriceItem: number
-    Order?: OrderCreateNestedOneWithoutOrderitemInput
+    order?: OrderCreateNestedOneWithoutOrderitemInput
   }
 
   export type OrderItemUncheckedCreateWithoutMenuItemInput = {
@@ -6788,14 +6760,14 @@ export namespace Prisma {
     id?: IntFilter<"OrderItem"> | number
     quantity?: IntFilter<"OrderItem"> | number
     totalPriceItem?: FloatFilter<"OrderItem"> | number
-    orderId?: IntNullableFilter<"OrderItem"> | number | null
     menuItemId?: IntNullableFilter<"OrderItem"> | number | null
+    orderId?: IntNullableFilter<"OrderItem"> | number | null
   }
 
   export type OrderItemCreateWithoutOrderInput = {
     quantity: number
     totalPriceItem: number
-    MenuItem?: MenuItemCreateNestedOneWithoutOrderitemsInput
+    menuItem?: MenuItemCreateNestedOneWithoutOrderItemsInput
   }
 
   export type OrderItemUncheckedCreateWithoutOrderInput = {
@@ -6877,6 +6849,24 @@ export namespace Prisma {
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
+  export type MenuItemCreateWithoutOrderItemsInput = {
+    name: string
+    price: number
+    img: string
+  }
+
+  export type MenuItemUncheckedCreateWithoutOrderItemsInput = {
+    item_id?: number
+    name: string
+    price: number
+    img: string
+  }
+
+  export type MenuItemCreateOrConnectWithoutOrderItemsInput = {
+    where: MenuItemWhereUniqueInput
+    create: XOR<MenuItemCreateWithoutOrderItemsInput, MenuItemUncheckedCreateWithoutOrderItemsInput>
+  }
+
   export type OrderCreateWithoutOrderitemInput = {
     status?: $Enums.OrderStatus
     totalPrice: number
@@ -6899,24 +6889,28 @@ export namespace Prisma {
     create: XOR<OrderCreateWithoutOrderitemInput, OrderUncheckedCreateWithoutOrderitemInput>
   }
 
-  export type MenuItemCreateWithoutOrderitemsInput = {
-    name: string
-    description: string
-    price: number
-    imageUrl: string
+  export type MenuItemUpsertWithoutOrderItemsInput = {
+    update: XOR<MenuItemUpdateWithoutOrderItemsInput, MenuItemUncheckedUpdateWithoutOrderItemsInput>
+    create: XOR<MenuItemCreateWithoutOrderItemsInput, MenuItemUncheckedCreateWithoutOrderItemsInput>
+    where?: MenuItemWhereInput
   }
 
-  export type MenuItemUncheckedCreateWithoutOrderitemsInput = {
-    id?: number
-    name: string
-    description: string
-    price: number
-    imageUrl: string
+  export type MenuItemUpdateToOneWithWhereWithoutOrderItemsInput = {
+    where?: MenuItemWhereInput
+    data: XOR<MenuItemUpdateWithoutOrderItemsInput, MenuItemUncheckedUpdateWithoutOrderItemsInput>
   }
 
-  export type MenuItemCreateOrConnectWithoutOrderitemsInput = {
-    where: MenuItemWhereUniqueInput
-    create: XOR<MenuItemCreateWithoutOrderitemsInput, MenuItemUncheckedCreateWithoutOrderitemsInput>
+  export type MenuItemUpdateWithoutOrderItemsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    img?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MenuItemUncheckedUpdateWithoutOrderItemsInput = {
+    item_id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    price?: FloatFieldUpdateOperationsInput | number
+    img?: StringFieldUpdateOperationsInput | string
   }
 
   export type OrderUpsertWithoutOrderitemInput = {
@@ -6945,32 +6939,6 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableIntFieldUpdateOperationsInput | number | null
-  }
-
-  export type MenuItemUpsertWithoutOrderitemsInput = {
-    update: XOR<MenuItemUpdateWithoutOrderitemsInput, MenuItemUncheckedUpdateWithoutOrderitemsInput>
-    create: XOR<MenuItemCreateWithoutOrderitemsInput, MenuItemUncheckedCreateWithoutOrderitemsInput>
-    where?: MenuItemWhereInput
-  }
-
-  export type MenuItemUpdateToOneWithWhereWithoutOrderitemsInput = {
-    where?: MenuItemWhereInput
-    data: XOR<MenuItemUpdateWithoutOrderitemsInput, MenuItemUncheckedUpdateWithoutOrderitemsInput>
-  }
-
-  export type MenuItemUpdateWithoutOrderitemsInput = {
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    imageUrl?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type MenuItemUncheckedUpdateWithoutOrderitemsInput = {
-    id?: IntFieldUpdateOperationsInput | number
-    name?: StringFieldUpdateOperationsInput | string
-    description?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
-    imageUrl?: StringFieldUpdateOperationsInput | string
   }
 
   export type OrderCreateManyUserInput = {
@@ -7016,7 +6984,7 @@ export namespace Prisma {
   export type OrderItemUpdateWithoutMenuItemInput = {
     quantity?: IntFieldUpdateOperationsInput | number
     totalPriceItem?: FloatFieldUpdateOperationsInput | number
-    Order?: OrderUpdateOneWithoutOrderitemNestedInput
+    order?: OrderUpdateOneWithoutOrderitemNestedInput
   }
 
   export type OrderItemUncheckedUpdateWithoutMenuItemInput = {
@@ -7043,7 +7011,7 @@ export namespace Prisma {
   export type OrderItemUpdateWithoutOrderInput = {
     quantity?: IntFieldUpdateOperationsInput | number
     totalPriceItem?: FloatFieldUpdateOperationsInput | number
-    MenuItem?: MenuItemUpdateOneWithoutOrderitemsNestedInput
+    menuItem?: MenuItemUpdateOneWithoutOrderItemsNestedInput
   }
 
   export type OrderItemUncheckedUpdateWithoutOrderInput = {
