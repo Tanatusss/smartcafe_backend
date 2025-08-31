@@ -1,5 +1,5 @@
-import z, { coerce } from "zod";
-
+import z from "zod";
+import 'dotenv/config'
 //coerce รับค่าอะไรก็ได้แล้วแปลงมาเป็นnumber
 const envSchema = z.object({
   PORT: z.coerce.number().min(0).max(65535),
@@ -11,8 +11,8 @@ const envSchema = z.object({
 
 const {success, data , error} = envSchema.safeParse(process.env)
 if(!success){
- console.log(error);
- process.exit(0);
+  console.log(z.flattenError(error))
+ throw new Error('Invalid environment variables')
 }
 
 export const envConfig = data;
