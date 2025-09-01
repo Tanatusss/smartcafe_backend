@@ -3,6 +3,7 @@ import { CreateOrderDTO } from "../validators/order.validator";
 import { prisma } from "../database/prisma";
 import { buildOrderPricing } from "../services/order.service";
 
+
 export const createOrder = async (req: Request, res: Response) => {
     try {
         const data = req.body as CreateOrderDTO;
@@ -64,7 +65,7 @@ export const getOrderById = async (req: Request, res: Response) => {
     }));
 
     return res.json({
-      status: order.status.toLowerCase(), // "preparing" / "pending" ...
+      status: order.status.toLowerCase(), 
       items,
       total_price: Number(order.totalPrice),
       created_at: order.createdAt.toISOString(),
@@ -75,3 +76,7 @@ export const getOrderById = async (req: Request, res: Response) => {
     return res.status(500).json({ message: "Internal Server Error" });
   }
 }
+
+
+
+

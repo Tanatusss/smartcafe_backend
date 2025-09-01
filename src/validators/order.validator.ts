@@ -1,4 +1,5 @@
 import z from "zod";
+import { validate } from "../middlewares/validate.middleware";
 
 
 
@@ -12,3 +13,9 @@ export const CreateOrderSchema = z.object({
 });
 
 export type CreateOrderDTO = z.infer<typeof CreateOrderSchema>;
+
+export const UpdateOrderStatusSchema = z.object({
+  status: z.enum(["PENDING", "PREPARING", "READY", "COMPLETED", "CANCELED"]),
+});
+export type UpdateOrderStatusDTO = z.infer<typeof UpdateOrderStatusSchema>;
+export const validateUpdateOrderStatus = validate(UpdateOrderStatusSchema);
