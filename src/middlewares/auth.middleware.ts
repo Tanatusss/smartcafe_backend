@@ -15,7 +15,7 @@ export const authenticateMiddleware = (
     if(bearer !== 'Bearer' || !token) throw new HttpError('Unauthorized', 401);
     try{
         const payload = jwt.verify(token, envConfig.JWT_SECRET)as UserPayload;
-        (req as any).user =payload;
+        (req as any).user = { id: payload.id, role: payload.role }
         next();
     }catch(err){
         return next(new HttpError('Unauthorized', 401));

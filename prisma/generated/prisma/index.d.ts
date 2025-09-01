@@ -33,6 +33,16 @@ export type Order = $Result.DefaultSelection<Prisma.$OrderPayload>
  * 
  */
 export type OrderItem = $Result.DefaultSelection<Prisma.$OrderItemPayload>
+/**
+ * Model Topping
+ * 
+ */
+export type Topping = $Result.DefaultSelection<Prisma.$ToppingPayload>
+/**
+ * Model OrderItemTopping
+ * 
+ */
+export type OrderItemTopping = $Result.DefaultSelection<Prisma.$OrderItemToppingPayload>
 
 /**
  * Enums
@@ -47,8 +57,10 @@ export type Role = (typeof Role)[keyof typeof Role]
 
 
 export const OrderStatus: {
-  READY: 'READY',
   PENDING: 'PENDING',
+  PREPARING: 'PREPARING',
+  READY: 'READY',
+  COMPLETED: 'COMPLETED',
   CANCELED: 'CANCELED'
 };
 
@@ -221,6 +233,26 @@ export class PrismaClient<
     * ```
     */
   get orderItem(): Prisma.OrderItemDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.topping`: Exposes CRUD operations for the **Topping** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Toppings
+    * const toppings = await prisma.topping.findMany()
+    * ```
+    */
+  get topping(): Prisma.ToppingDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.orderItemTopping`: Exposes CRUD operations for the **OrderItemTopping** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more OrderItemToppings
+    * const orderItemToppings = await prisma.orderItemTopping.findMany()
+    * ```
+    */
+  get orderItemTopping(): Prisma.OrderItemToppingDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -664,7 +696,9 @@ export namespace Prisma {
     User: 'User',
     MenuItem: 'MenuItem',
     Order: 'Order',
-    OrderItem: 'OrderItem'
+    OrderItem: 'OrderItem',
+    Topping: 'Topping',
+    OrderItemTopping: 'OrderItemTopping'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -683,7 +717,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "user" | "menuItem" | "order" | "orderItem"
+      modelProps: "user" | "menuItem" | "order" | "orderItem" | "topping" | "orderItemTopping"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -951,6 +985,138 @@ export namespace Prisma {
           }
         }
       }
+      Topping: {
+        payload: Prisma.$ToppingPayload<ExtArgs>
+        fields: Prisma.ToppingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ToppingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ToppingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ToppingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ToppingPayload>
+          }
+          findFirst: {
+            args: Prisma.ToppingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ToppingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ToppingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ToppingPayload>
+          }
+          findMany: {
+            args: Prisma.ToppingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ToppingPayload>[]
+          }
+          create: {
+            args: Prisma.ToppingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ToppingPayload>
+          }
+          createMany: {
+            args: Prisma.ToppingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.ToppingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ToppingPayload>
+          }
+          update: {
+            args: Prisma.ToppingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ToppingPayload>
+          }
+          deleteMany: {
+            args: Prisma.ToppingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ToppingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.ToppingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ToppingPayload>
+          }
+          aggregate: {
+            args: Prisma.ToppingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateTopping>
+          }
+          groupBy: {
+            args: Prisma.ToppingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ToppingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ToppingCountArgs<ExtArgs>
+            result: $Utils.Optional<ToppingCountAggregateOutputType> | number
+          }
+        }
+      }
+      OrderItemTopping: {
+        payload: Prisma.$OrderItemToppingPayload<ExtArgs>
+        fields: Prisma.OrderItemToppingFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.OrderItemToppingFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderItemToppingPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.OrderItemToppingFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderItemToppingPayload>
+          }
+          findFirst: {
+            args: Prisma.OrderItemToppingFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderItemToppingPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.OrderItemToppingFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderItemToppingPayload>
+          }
+          findMany: {
+            args: Prisma.OrderItemToppingFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderItemToppingPayload>[]
+          }
+          create: {
+            args: Prisma.OrderItemToppingCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderItemToppingPayload>
+          }
+          createMany: {
+            args: Prisma.OrderItemToppingCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          delete: {
+            args: Prisma.OrderItemToppingDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderItemToppingPayload>
+          }
+          update: {
+            args: Prisma.OrderItemToppingUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderItemToppingPayload>
+          }
+          deleteMany: {
+            args: Prisma.OrderItemToppingDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.OrderItemToppingUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          upsert: {
+            args: Prisma.OrderItemToppingUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$OrderItemToppingPayload>
+          }
+          aggregate: {
+            args: Prisma.OrderItemToppingAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateOrderItemTopping>
+          }
+          groupBy: {
+            args: Prisma.OrderItemToppingGroupByArgs<ExtArgs>
+            result: $Utils.Optional<OrderItemToppingGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.OrderItemToppingCountArgs<ExtArgs>
+            result: $Utils.Optional<OrderItemToppingCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -1047,6 +1213,8 @@ export namespace Prisma {
     menuItem?: MenuItemOmit
     order?: OrderOmit
     orderItem?: OrderItemOmit
+    topping?: ToppingOmit
+    orderItemTopping?: OrderItemToppingOmit
   }
 
   /* Types for Logging */
@@ -1189,11 +1357,11 @@ export namespace Prisma {
    */
 
   export type OrderCountOutputType = {
-    orderitem: number
+    orderItems: number
   }
 
   export type OrderCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    orderitem?: boolean | OrderCountOutputTypeCountOrderitemArgs
+    orderItems?: boolean | OrderCountOutputTypeCountOrderItemsArgs
   }
 
   // Custom InputTypes
@@ -1210,8 +1378,70 @@ export namespace Prisma {
   /**
    * OrderCountOutputType without action
    */
-  export type OrderCountOutputTypeCountOrderitemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type OrderCountOutputTypeCountOrderItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: OrderItemWhereInput
+  }
+
+
+  /**
+   * Count Type OrderItemCountOutputType
+   */
+
+  export type OrderItemCountOutputType = {
+    orderItemToppings: number
+  }
+
+  export type OrderItemCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    orderItemToppings?: boolean | OrderItemCountOutputTypeCountOrderItemToppingsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * OrderItemCountOutputType without action
+   */
+  export type OrderItemCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemCountOutputType
+     */
+    select?: OrderItemCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * OrderItemCountOutputType without action
+   */
+  export type OrderItemCountOutputTypeCountOrderItemToppingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderItemToppingWhereInput
+  }
+
+
+  /**
+   * Count Type ToppingCountOutputType
+   */
+
+  export type ToppingCountOutputType = {
+    orderItemToppings: number
+  }
+
+  export type ToppingCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    orderItemToppings?: boolean | ToppingCountOutputTypeCountOrderItemToppingsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ToppingCountOutputType without action
+   */
+  export type ToppingCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ToppingCountOutputType
+     */
+    select?: ToppingCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ToppingCountOutputType without action
+   */
+  export type ToppingCountOutputTypeCountOrderItemToppingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderItemToppingWhereInput
   }
 
 
@@ -1244,6 +1474,8 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     role: $Enums.Role | null
   }
 
@@ -1252,6 +1484,8 @@ export namespace Prisma {
     name: string | null
     email: string | null
     password: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
     role: $Enums.Role | null
   }
 
@@ -1260,6 +1494,8 @@ export namespace Prisma {
     name: number
     email: number
     password: number
+    createdAt: number
+    updatedAt: number
     role: number
     _all: number
   }
@@ -1278,6 +1514,8 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    createdAt?: true
+    updatedAt?: true
     role?: true
   }
 
@@ -1286,6 +1524,8 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    createdAt?: true
+    updatedAt?: true
     role?: true
   }
 
@@ -1294,6 +1534,8 @@ export namespace Prisma {
     name?: true
     email?: true
     password?: true
+    createdAt?: true
+    updatedAt?: true
     role?: true
     _all?: true
   }
@@ -1389,6 +1631,8 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    createdAt: Date
+    updatedAt: Date
     role: $Enums.Role
     _count: UserCountAggregateOutputType | null
     _avg: UserAvgAggregateOutputType | null
@@ -1416,6 +1660,8 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     role?: boolean
     orders?: boolean | User$ordersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1428,10 +1674,12 @@ export namespace Prisma {
     name?: boolean
     email?: boolean
     password?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     role?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "role", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "password" | "createdAt" | "updatedAt" | "role", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     orders?: boolean | User$ordersArgs<ExtArgs>
     _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
@@ -1447,6 +1695,8 @@ export namespace Prisma {
       name: string
       email: string
       password: string
+      createdAt: Date
+      updatedAt: Date
       role: $Enums.Role
     }, ExtArgs["result"]["user"]>
     composites: {}
@@ -1822,6 +2072,8 @@ export namespace Prisma {
     readonly name: FieldRef<"User", 'String'>
     readonly email: FieldRef<"User", 'String'>
     readonly password: FieldRef<"User", 'String'>
+    readonly createdAt: FieldRef<"User", 'DateTime'>
+    readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly role: FieldRef<"User", 'Role'>
   }
     
@@ -2222,25 +2474,25 @@ export namespace Prisma {
 
   export type MenuItemAvgAggregateOutputType = {
     item_id: number | null
-    price: number | null
+    price: Decimal | null
   }
 
   export type MenuItemSumAggregateOutputType = {
     item_id: number | null
-    price: number | null
+    price: Decimal | null
   }
 
   export type MenuItemMinAggregateOutputType = {
     item_id: number | null
     name: string | null
-    price: number | null
+    price: Decimal | null
     img: string | null
   }
 
   export type MenuItemMaxAggregateOutputType = {
     item_id: number | null
     name: string | null
-    price: number | null
+    price: Decimal | null
     img: string | null
   }
 
@@ -2374,7 +2626,7 @@ export namespace Prisma {
   export type MenuItemGroupByOutputType = {
     item_id: number
     name: string
-    price: number
+    price: Decimal
     img: string
     _count: MenuItemCountAggregateOutputType | null
     _avg: MenuItemAvgAggregateOutputType | null
@@ -2429,7 +2681,7 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       item_id: number
       name: string
-      price: number
+      price: Prisma.Decimal
       img: string
     }, ExtArgs["result"]["menuItem"]>
     composites: {}
@@ -2803,7 +3055,7 @@ export namespace Prisma {
   interface MenuItemFieldRefs {
     readonly item_id: FieldRef<"MenuItem", 'Int'>
     readonly name: FieldRef<"MenuItem", 'String'>
-    readonly price: FieldRef<"MenuItem", 'Float'>
+    readonly price: FieldRef<"MenuItem", 'Decimal'>
     readonly img: FieldRef<"MenuItem", 'String'>
   }
     
@@ -3203,37 +3455,37 @@ export namespace Prisma {
   }
 
   export type OrderAvgAggregateOutputType = {
-    id: number | null
-    totalPrice: number | null
+    order_id: number | null
+    totalPrice: Decimal | null
     userId: number | null
   }
 
   export type OrderSumAggregateOutputType = {
-    id: number | null
-    totalPrice: number | null
+    order_id: number | null
+    totalPrice: Decimal | null
     userId: number | null
   }
 
   export type OrderMinAggregateOutputType = {
-    id: number | null
+    order_id: number | null
     status: $Enums.OrderStatus | null
-    totalPrice: number | null
+    totalPrice: Decimal | null
     createdAt: Date | null
     completedAt: Date | null
     userId: number | null
   }
 
   export type OrderMaxAggregateOutputType = {
-    id: number | null
+    order_id: number | null
     status: $Enums.OrderStatus | null
-    totalPrice: number | null
+    totalPrice: Decimal | null
     createdAt: Date | null
     completedAt: Date | null
     userId: number | null
   }
 
   export type OrderCountAggregateOutputType = {
-    id: number
+    order_id: number
     status: number
     totalPrice: number
     createdAt: number
@@ -3244,19 +3496,19 @@ export namespace Prisma {
 
 
   export type OrderAvgAggregateInputType = {
-    id?: true
+    order_id?: true
     totalPrice?: true
     userId?: true
   }
 
   export type OrderSumAggregateInputType = {
-    id?: true
+    order_id?: true
     totalPrice?: true
     userId?: true
   }
 
   export type OrderMinAggregateInputType = {
-    id?: true
+    order_id?: true
     status?: true
     totalPrice?: true
     createdAt?: true
@@ -3265,7 +3517,7 @@ export namespace Prisma {
   }
 
   export type OrderMaxAggregateInputType = {
-    id?: true
+    order_id?: true
     status?: true
     totalPrice?: true
     createdAt?: true
@@ -3274,7 +3526,7 @@ export namespace Prisma {
   }
 
   export type OrderCountAggregateInputType = {
-    id?: true
+    order_id?: true
     status?: true
     totalPrice?: true
     createdAt?: true
@@ -3370,9 +3622,9 @@ export namespace Prisma {
   }
 
   export type OrderGroupByOutputType = {
-    id: number
+    order_id: number
     status: $Enums.OrderStatus
-    totalPrice: number
+    totalPrice: Decimal
     createdAt: Date
     completedAt: Date | null
     userId: number | null
@@ -3398,13 +3650,13 @@ export namespace Prisma {
 
 
   export type OrderSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
+    order_id?: boolean
     status?: boolean
     totalPrice?: boolean
     createdAt?: boolean
     completedAt?: boolean
     userId?: boolean
-    orderitem?: boolean | Order$orderitemArgs<ExtArgs>
+    orderItems?: boolean | Order$orderItemsArgs<ExtArgs>
     User?: boolean | Order$UserArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["order"]>
@@ -3412,7 +3664,7 @@ export namespace Prisma {
 
 
   export type OrderSelectScalar = {
-    id?: boolean
+    order_id?: boolean
     status?: boolean
     totalPrice?: boolean
     createdAt?: boolean
@@ -3420,9 +3672,9 @@ export namespace Prisma {
     userId?: boolean
   }
 
-  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "status" | "totalPrice" | "createdAt" | "completedAt" | "userId", ExtArgs["result"]["order"]>
+  export type OrderOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"order_id" | "status" | "totalPrice" | "createdAt" | "completedAt" | "userId", ExtArgs["result"]["order"]>
   export type OrderInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    orderitem?: boolean | Order$orderitemArgs<ExtArgs>
+    orderItems?: boolean | Order$orderItemsArgs<ExtArgs>
     User?: boolean | Order$UserArgs<ExtArgs>
     _count?: boolean | OrderCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -3430,13 +3682,13 @@ export namespace Prisma {
   export type $OrderPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Order"
     objects: {
-      orderitem: Prisma.$OrderItemPayload<ExtArgs>[]
+      orderItems: Prisma.$OrderItemPayload<ExtArgs>[]
       User: Prisma.$UserPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
-      id: number
+      order_id: number
       status: $Enums.OrderStatus
-      totalPrice: number
+      totalPrice: Prisma.Decimal
       createdAt: Date
       completedAt: Date | null
       userId: number | null
@@ -3523,8 +3775,8 @@ export namespace Prisma {
      * // Get first 10 Orders
      * const orders = await prisma.order.findMany({ take: 10 })
      * 
-     * // Only select the `id`
-     * const orderWithIdOnly = await prisma.order.findMany({ select: { id: true } })
+     * // Only select the `order_id`
+     * const orderWithOrder_idOnly = await prisma.order.findMany({ select: { order_id: true } })
      * 
      */
     findMany<T extends OrderFindManyArgs>(args?: SelectSubset<T, OrderFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
@@ -3780,7 +4032,7 @@ export namespace Prisma {
    */
   export interface Prisma__OrderClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    orderitem<T extends Order$orderitemArgs<ExtArgs> = {}>(args?: Subset<T, Order$orderitemArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    orderItems<T extends Order$orderItemsArgs<ExtArgs> = {}>(args?: Subset<T, Order$orderItemsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     User<T extends Order$UserArgs<ExtArgs> = {}>(args?: Subset<T, Order$UserArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -3811,9 +4063,9 @@ export namespace Prisma {
    * Fields of the Order model
    */
   interface OrderFieldRefs {
-    readonly id: FieldRef<"Order", 'Int'>
+    readonly order_id: FieldRef<"Order", 'Int'>
     readonly status: FieldRef<"Order", 'OrderStatus'>
-    readonly totalPrice: FieldRef<"Order", 'Float'>
+    readonly totalPrice: FieldRef<"Order", 'Decimal'>
     readonly createdAt: FieldRef<"Order", 'DateTime'>
     readonly completedAt: FieldRef<"Order", 'DateTime'>
     readonly userId: FieldRef<"Order", 'Int'>
@@ -4160,9 +4412,9 @@ export namespace Prisma {
   }
 
   /**
-   * Order.orderitem
+   * Order.orderItems
    */
-  export type Order$orderitemArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Order$orderItemsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the OrderItem
      */
@@ -4235,49 +4487,55 @@ export namespace Prisma {
 
   export type OrderItemAvgAggregateOutputType = {
     id: number | null
-    quantity: number | null
-    totalPriceItem: number | null
+    qty: number | null
+    totalPriceItem: Decimal | null
     menuItemId: number | null
     orderId: number | null
   }
 
   export type OrderItemSumAggregateOutputType = {
     id: number | null
-    quantity: number | null
-    totalPriceItem: number | null
+    qty: number | null
+    totalPriceItem: Decimal | null
     menuItemId: number | null
     orderId: number | null
   }
 
   export type OrderItemMinAggregateOutputType = {
     id: number | null
-    quantity: number | null
-    totalPriceItem: number | null
+    qty: number | null
+    totalPriceItem: Decimal | null
     menuItemId: number | null
     orderId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type OrderItemMaxAggregateOutputType = {
     id: number | null
-    quantity: number | null
-    totalPriceItem: number | null
+    qty: number | null
+    totalPriceItem: Decimal | null
     menuItemId: number | null
     orderId: number | null
+    createdAt: Date | null
+    updatedAt: Date | null
   }
 
   export type OrderItemCountAggregateOutputType = {
     id: number
-    quantity: number
+    qty: number
     totalPriceItem: number
     menuItemId: number
     orderId: number
+    createdAt: number
+    updatedAt: number
     _all: number
   }
 
 
   export type OrderItemAvgAggregateInputType = {
     id?: true
-    quantity?: true
+    qty?: true
     totalPriceItem?: true
     menuItemId?: true
     orderId?: true
@@ -4285,7 +4543,7 @@ export namespace Prisma {
 
   export type OrderItemSumAggregateInputType = {
     id?: true
-    quantity?: true
+    qty?: true
     totalPriceItem?: true
     menuItemId?: true
     orderId?: true
@@ -4293,26 +4551,32 @@ export namespace Prisma {
 
   export type OrderItemMinAggregateInputType = {
     id?: true
-    quantity?: true
+    qty?: true
     totalPriceItem?: true
     menuItemId?: true
     orderId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type OrderItemMaxAggregateInputType = {
     id?: true
-    quantity?: true
+    qty?: true
     totalPriceItem?: true
     menuItemId?: true
     orderId?: true
+    createdAt?: true
+    updatedAt?: true
   }
 
   export type OrderItemCountAggregateInputType = {
     id?: true
-    quantity?: true
+    qty?: true
     totalPriceItem?: true
     menuItemId?: true
     orderId?: true
+    createdAt?: true
+    updatedAt?: true
     _all?: true
   }
 
@@ -4404,10 +4668,12 @@ export namespace Prisma {
 
   export type OrderItemGroupByOutputType = {
     id: number
-    quantity: number
-    totalPriceItem: number
+    qty: number
+    totalPriceItem: Decimal
     menuItemId: number | null
     orderId: number | null
+    createdAt: Date
+    updatedAt: Date
     _count: OrderItemCountAggregateOutputType | null
     _avg: OrderItemAvgAggregateOutputType | null
     _sum: OrderItemSumAggregateOutputType | null
@@ -4431,28 +4697,36 @@ export namespace Prisma {
 
   export type OrderItemSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    quantity?: boolean
+    qty?: boolean
     totalPriceItem?: boolean
     menuItemId?: boolean
     orderId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
     menuItem?: boolean | OrderItem$menuItemArgs<ExtArgs>
     order?: boolean | OrderItem$orderArgs<ExtArgs>
+    orderItemToppings?: boolean | OrderItem$orderItemToppingsArgs<ExtArgs>
+    _count?: boolean | OrderItemCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["orderItem"]>
 
 
 
   export type OrderItemSelectScalar = {
     id?: boolean
-    quantity?: boolean
+    qty?: boolean
     totalPriceItem?: boolean
     menuItemId?: boolean
     orderId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
   }
 
-  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "quantity" | "totalPriceItem" | "menuItemId" | "orderId", ExtArgs["result"]["orderItem"]>
+  export type OrderItemOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "qty" | "totalPriceItem" | "menuItemId" | "orderId" | "createdAt" | "updatedAt", ExtArgs["result"]["orderItem"]>
   export type OrderItemInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     menuItem?: boolean | OrderItem$menuItemArgs<ExtArgs>
     order?: boolean | OrderItem$orderArgs<ExtArgs>
+    orderItemToppings?: boolean | OrderItem$orderItemToppingsArgs<ExtArgs>
+    _count?: boolean | OrderItemCountOutputTypeDefaultArgs<ExtArgs>
   }
 
   export type $OrderItemPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -4460,13 +4734,16 @@ export namespace Prisma {
     objects: {
       menuItem: Prisma.$MenuItemPayload<ExtArgs> | null
       order: Prisma.$OrderPayload<ExtArgs> | null
+      orderItemToppings: Prisma.$OrderItemToppingPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      quantity: number
-      totalPriceItem: number
+      qty: number
+      totalPriceItem: Prisma.Decimal
       menuItemId: number | null
       orderId: number | null
+      createdAt: Date
+      updatedAt: Date
     }, ExtArgs["result"]["orderItem"]>
     composites: {}
   }
@@ -4809,6 +5086,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     menuItem<T extends OrderItem$menuItemArgs<ExtArgs> = {}>(args?: Subset<T, OrderItem$menuItemArgs<ExtArgs>>): Prisma__MenuItemClient<$Result.GetResult<Prisma.$MenuItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     order<T extends OrderItem$orderArgs<ExtArgs> = {}>(args?: Subset<T, OrderItem$orderArgs<ExtArgs>>): Prisma__OrderClient<$Result.GetResult<Prisma.$OrderPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    orderItemToppings<T extends OrderItem$orderItemToppingsArgs<ExtArgs> = {}>(args?: Subset<T, OrderItem$orderItemToppingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -4839,10 +5117,12 @@ export namespace Prisma {
    */
   interface OrderItemFieldRefs {
     readonly id: FieldRef<"OrderItem", 'Int'>
-    readonly quantity: FieldRef<"OrderItem", 'Int'>
-    readonly totalPriceItem: FieldRef<"OrderItem", 'Float'>
+    readonly qty: FieldRef<"OrderItem", 'Int'>
+    readonly totalPriceItem: FieldRef<"OrderItem", 'Decimal'>
     readonly menuItemId: FieldRef<"OrderItem", 'Int'>
     readonly orderId: FieldRef<"OrderItem", 'Int'>
+    readonly createdAt: FieldRef<"OrderItem", 'DateTime'>
+    readonly updatedAt: FieldRef<"OrderItem", 'DateTime'>
   }
     
 
@@ -5224,6 +5504,30 @@ export namespace Prisma {
   }
 
   /**
+   * OrderItem.orderItemToppings
+   */
+  export type OrderItem$orderItemToppingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    where?: OrderItemToppingWhereInput
+    orderBy?: OrderItemToppingOrderByWithRelationInput | OrderItemToppingOrderByWithRelationInput[]
+    cursor?: OrderItemToppingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrderItemToppingScalarFieldEnum | OrderItemToppingScalarFieldEnum[]
+  }
+
+  /**
    * OrderItem without action
    */
   export type OrderItemDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5239,6 +5543,1937 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: OrderItemInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model Topping
+   */
+
+  export type AggregateTopping = {
+    _count: ToppingCountAggregateOutputType | null
+    _avg: ToppingAvgAggregateOutputType | null
+    _sum: ToppingSumAggregateOutputType | null
+    _min: ToppingMinAggregateOutputType | null
+    _max: ToppingMaxAggregateOutputType | null
+  }
+
+  export type ToppingAvgAggregateOutputType = {
+    id: number | null
+    priceTopping: Decimal | null
+  }
+
+  export type ToppingSumAggregateOutputType = {
+    id: number | null
+    priceTopping: Decimal | null
+  }
+
+  export type ToppingMinAggregateOutputType = {
+    id: number | null
+    name: string | null
+    priceTopping: Decimal | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ToppingMaxAggregateOutputType = {
+    id: number | null
+    name: string | null
+    priceTopping: Decimal | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ToppingCountAggregateOutputType = {
+    id: number
+    name: number
+    priceTopping: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ToppingAvgAggregateInputType = {
+    id?: true
+    priceTopping?: true
+  }
+
+  export type ToppingSumAggregateInputType = {
+    id?: true
+    priceTopping?: true
+  }
+
+  export type ToppingMinAggregateInputType = {
+    id?: true
+    name?: true
+    priceTopping?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ToppingMaxAggregateInputType = {
+    id?: true
+    name?: true
+    priceTopping?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ToppingCountAggregateInputType = {
+    id?: true
+    name?: true
+    priceTopping?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ToppingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Topping to aggregate.
+     */
+    where?: ToppingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Toppings to fetch.
+     */
+    orderBy?: ToppingOrderByWithRelationInput | ToppingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ToppingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Toppings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Toppings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Toppings
+    **/
+    _count?: true | ToppingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ToppingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ToppingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ToppingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ToppingMaxAggregateInputType
+  }
+
+  export type GetToppingAggregateType<T extends ToppingAggregateArgs> = {
+        [P in keyof T & keyof AggregateTopping]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateTopping[P]>
+      : GetScalarType<T[P], AggregateTopping[P]>
+  }
+
+
+
+
+  export type ToppingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ToppingWhereInput
+    orderBy?: ToppingOrderByWithAggregationInput | ToppingOrderByWithAggregationInput[]
+    by: ToppingScalarFieldEnum[] | ToppingScalarFieldEnum
+    having?: ToppingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ToppingCountAggregateInputType | true
+    _avg?: ToppingAvgAggregateInputType
+    _sum?: ToppingSumAggregateInputType
+    _min?: ToppingMinAggregateInputType
+    _max?: ToppingMaxAggregateInputType
+  }
+
+  export type ToppingGroupByOutputType = {
+    id: number
+    name: string
+    priceTopping: Decimal
+    createdAt: Date
+    updatedAt: Date
+    _count: ToppingCountAggregateOutputType | null
+    _avg: ToppingAvgAggregateOutputType | null
+    _sum: ToppingSumAggregateOutputType | null
+    _min: ToppingMinAggregateOutputType | null
+    _max: ToppingMaxAggregateOutputType | null
+  }
+
+  type GetToppingGroupByPayload<T extends ToppingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ToppingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ToppingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ToppingGroupByOutputType[P]>
+            : GetScalarType<T[P], ToppingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ToppingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    priceTopping?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    orderItemToppings?: boolean | Topping$orderItemToppingsArgs<ExtArgs>
+    _count?: boolean | ToppingCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["topping"]>
+
+
+
+  export type ToppingSelectScalar = {
+    id?: boolean
+    name?: boolean
+    priceTopping?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ToppingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "priceTopping" | "createdAt" | "updatedAt", ExtArgs["result"]["topping"]>
+  export type ToppingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    orderItemToppings?: boolean | Topping$orderItemToppingsArgs<ExtArgs>
+    _count?: boolean | ToppingCountOutputTypeDefaultArgs<ExtArgs>
+  }
+
+  export type $ToppingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Topping"
+    objects: {
+      orderItemToppings: Prisma.$OrderItemToppingPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      name: string
+      priceTopping: Prisma.Decimal
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["topping"]>
+    composites: {}
+  }
+
+  type ToppingGetPayload<S extends boolean | null | undefined | ToppingDefaultArgs> = $Result.GetResult<Prisma.$ToppingPayload, S>
+
+  type ToppingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ToppingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ToppingCountAggregateInputType | true
+    }
+
+  export interface ToppingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Topping'], meta: { name: 'Topping' } }
+    /**
+     * Find zero or one Topping that matches the filter.
+     * @param {ToppingFindUniqueArgs} args - Arguments to find a Topping
+     * @example
+     * // Get one Topping
+     * const topping = await prisma.topping.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ToppingFindUniqueArgs>(args: SelectSubset<T, ToppingFindUniqueArgs<ExtArgs>>): Prisma__ToppingClient<$Result.GetResult<Prisma.$ToppingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Topping that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ToppingFindUniqueOrThrowArgs} args - Arguments to find a Topping
+     * @example
+     * // Get one Topping
+     * const topping = await prisma.topping.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ToppingFindUniqueOrThrowArgs>(args: SelectSubset<T, ToppingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ToppingClient<$Result.GetResult<Prisma.$ToppingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Topping that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ToppingFindFirstArgs} args - Arguments to find a Topping
+     * @example
+     * // Get one Topping
+     * const topping = await prisma.topping.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ToppingFindFirstArgs>(args?: SelectSubset<T, ToppingFindFirstArgs<ExtArgs>>): Prisma__ToppingClient<$Result.GetResult<Prisma.$ToppingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Topping that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ToppingFindFirstOrThrowArgs} args - Arguments to find a Topping
+     * @example
+     * // Get one Topping
+     * const topping = await prisma.topping.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ToppingFindFirstOrThrowArgs>(args?: SelectSubset<T, ToppingFindFirstOrThrowArgs<ExtArgs>>): Prisma__ToppingClient<$Result.GetResult<Prisma.$ToppingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Toppings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ToppingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Toppings
+     * const toppings = await prisma.topping.findMany()
+     * 
+     * // Get first 10 Toppings
+     * const toppings = await prisma.topping.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const toppingWithIdOnly = await prisma.topping.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ToppingFindManyArgs>(args?: SelectSubset<T, ToppingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ToppingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Topping.
+     * @param {ToppingCreateArgs} args - Arguments to create a Topping.
+     * @example
+     * // Create one Topping
+     * const Topping = await prisma.topping.create({
+     *   data: {
+     *     // ... data to create a Topping
+     *   }
+     * })
+     * 
+     */
+    create<T extends ToppingCreateArgs>(args: SelectSubset<T, ToppingCreateArgs<ExtArgs>>): Prisma__ToppingClient<$Result.GetResult<Prisma.$ToppingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Toppings.
+     * @param {ToppingCreateManyArgs} args - Arguments to create many Toppings.
+     * @example
+     * // Create many Toppings
+     * const topping = await prisma.topping.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ToppingCreateManyArgs>(args?: SelectSubset<T, ToppingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a Topping.
+     * @param {ToppingDeleteArgs} args - Arguments to delete one Topping.
+     * @example
+     * // Delete one Topping
+     * const Topping = await prisma.topping.delete({
+     *   where: {
+     *     // ... filter to delete one Topping
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ToppingDeleteArgs>(args: SelectSubset<T, ToppingDeleteArgs<ExtArgs>>): Prisma__ToppingClient<$Result.GetResult<Prisma.$ToppingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Topping.
+     * @param {ToppingUpdateArgs} args - Arguments to update one Topping.
+     * @example
+     * // Update one Topping
+     * const topping = await prisma.topping.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ToppingUpdateArgs>(args: SelectSubset<T, ToppingUpdateArgs<ExtArgs>>): Prisma__ToppingClient<$Result.GetResult<Prisma.$ToppingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Toppings.
+     * @param {ToppingDeleteManyArgs} args - Arguments to filter Toppings to delete.
+     * @example
+     * // Delete a few Toppings
+     * const { count } = await prisma.topping.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ToppingDeleteManyArgs>(args?: SelectSubset<T, ToppingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Toppings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ToppingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Toppings
+     * const topping = await prisma.topping.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ToppingUpdateManyArgs>(args: SelectSubset<T, ToppingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one Topping.
+     * @param {ToppingUpsertArgs} args - Arguments to update or create a Topping.
+     * @example
+     * // Update or create a Topping
+     * const topping = await prisma.topping.upsert({
+     *   create: {
+     *     // ... data to create a Topping
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Topping we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ToppingUpsertArgs>(args: SelectSubset<T, ToppingUpsertArgs<ExtArgs>>): Prisma__ToppingClient<$Result.GetResult<Prisma.$ToppingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Toppings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ToppingCountArgs} args - Arguments to filter Toppings to count.
+     * @example
+     * // Count the number of Toppings
+     * const count = await prisma.topping.count({
+     *   where: {
+     *     // ... the filter for the Toppings we want to count
+     *   }
+     * })
+    **/
+    count<T extends ToppingCountArgs>(
+      args?: Subset<T, ToppingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ToppingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Topping.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ToppingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ToppingAggregateArgs>(args: Subset<T, ToppingAggregateArgs>): Prisma.PrismaPromise<GetToppingAggregateType<T>>
+
+    /**
+     * Group by Topping.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ToppingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ToppingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ToppingGroupByArgs['orderBy'] }
+        : { orderBy?: ToppingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ToppingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetToppingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Topping model
+   */
+  readonly fields: ToppingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Topping.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ToppingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    orderItemToppings<T extends Topping$orderItemToppingsArgs<ExtArgs> = {}>(args?: Subset<T, Topping$orderItemToppingsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Topping model
+   */
+  interface ToppingFieldRefs {
+    readonly id: FieldRef<"Topping", 'Int'>
+    readonly name: FieldRef<"Topping", 'String'>
+    readonly priceTopping: FieldRef<"Topping", 'Decimal'>
+    readonly createdAt: FieldRef<"Topping", 'DateTime'>
+    readonly updatedAt: FieldRef<"Topping", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Topping findUnique
+   */
+  export type ToppingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topping
+     */
+    select?: ToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topping
+     */
+    omit?: ToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToppingInclude<ExtArgs> | null
+    /**
+     * Filter, which Topping to fetch.
+     */
+    where: ToppingWhereUniqueInput
+  }
+
+  /**
+   * Topping findUniqueOrThrow
+   */
+  export type ToppingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topping
+     */
+    select?: ToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topping
+     */
+    omit?: ToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToppingInclude<ExtArgs> | null
+    /**
+     * Filter, which Topping to fetch.
+     */
+    where: ToppingWhereUniqueInput
+  }
+
+  /**
+   * Topping findFirst
+   */
+  export type ToppingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topping
+     */
+    select?: ToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topping
+     */
+    omit?: ToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToppingInclude<ExtArgs> | null
+    /**
+     * Filter, which Topping to fetch.
+     */
+    where?: ToppingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Toppings to fetch.
+     */
+    orderBy?: ToppingOrderByWithRelationInput | ToppingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Toppings.
+     */
+    cursor?: ToppingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Toppings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Toppings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Toppings.
+     */
+    distinct?: ToppingScalarFieldEnum | ToppingScalarFieldEnum[]
+  }
+
+  /**
+   * Topping findFirstOrThrow
+   */
+  export type ToppingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topping
+     */
+    select?: ToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topping
+     */
+    omit?: ToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToppingInclude<ExtArgs> | null
+    /**
+     * Filter, which Topping to fetch.
+     */
+    where?: ToppingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Toppings to fetch.
+     */
+    orderBy?: ToppingOrderByWithRelationInput | ToppingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Toppings.
+     */
+    cursor?: ToppingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Toppings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Toppings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Toppings.
+     */
+    distinct?: ToppingScalarFieldEnum | ToppingScalarFieldEnum[]
+  }
+
+  /**
+   * Topping findMany
+   */
+  export type ToppingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topping
+     */
+    select?: ToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topping
+     */
+    omit?: ToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToppingInclude<ExtArgs> | null
+    /**
+     * Filter, which Toppings to fetch.
+     */
+    where?: ToppingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Toppings to fetch.
+     */
+    orderBy?: ToppingOrderByWithRelationInput | ToppingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Toppings.
+     */
+    cursor?: ToppingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Toppings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Toppings.
+     */
+    skip?: number
+    distinct?: ToppingScalarFieldEnum | ToppingScalarFieldEnum[]
+  }
+
+  /**
+   * Topping create
+   */
+  export type ToppingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topping
+     */
+    select?: ToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topping
+     */
+    omit?: ToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToppingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Topping.
+     */
+    data: XOR<ToppingCreateInput, ToppingUncheckedCreateInput>
+  }
+
+  /**
+   * Topping createMany
+   */
+  export type ToppingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Toppings.
+     */
+    data: ToppingCreateManyInput | ToppingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Topping update
+   */
+  export type ToppingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topping
+     */
+    select?: ToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topping
+     */
+    omit?: ToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToppingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Topping.
+     */
+    data: XOR<ToppingUpdateInput, ToppingUncheckedUpdateInput>
+    /**
+     * Choose, which Topping to update.
+     */
+    where: ToppingWhereUniqueInput
+  }
+
+  /**
+   * Topping updateMany
+   */
+  export type ToppingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Toppings.
+     */
+    data: XOR<ToppingUpdateManyMutationInput, ToppingUncheckedUpdateManyInput>
+    /**
+     * Filter which Toppings to update
+     */
+    where?: ToppingWhereInput
+    /**
+     * Limit how many Toppings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Topping upsert
+   */
+  export type ToppingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topping
+     */
+    select?: ToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topping
+     */
+    omit?: ToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToppingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Topping to update in case it exists.
+     */
+    where: ToppingWhereUniqueInput
+    /**
+     * In case the Topping found by the `where` argument doesn't exist, create a new Topping with this data.
+     */
+    create: XOR<ToppingCreateInput, ToppingUncheckedCreateInput>
+    /**
+     * In case the Topping was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ToppingUpdateInput, ToppingUncheckedUpdateInput>
+  }
+
+  /**
+   * Topping delete
+   */
+  export type ToppingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topping
+     */
+    select?: ToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topping
+     */
+    omit?: ToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToppingInclude<ExtArgs> | null
+    /**
+     * Filter which Topping to delete.
+     */
+    where: ToppingWhereUniqueInput
+  }
+
+  /**
+   * Topping deleteMany
+   */
+  export type ToppingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Toppings to delete
+     */
+    where?: ToppingWhereInput
+    /**
+     * Limit how many Toppings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Topping.orderItemToppings
+   */
+  export type Topping$orderItemToppingsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    where?: OrderItemToppingWhereInput
+    orderBy?: OrderItemToppingOrderByWithRelationInput | OrderItemToppingOrderByWithRelationInput[]
+    cursor?: OrderItemToppingWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: OrderItemToppingScalarFieldEnum | OrderItemToppingScalarFieldEnum[]
+  }
+
+  /**
+   * Topping without action
+   */
+  export type ToppingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Topping
+     */
+    select?: ToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Topping
+     */
+    omit?: ToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ToppingInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model OrderItemTopping
+   */
+
+  export type AggregateOrderItemTopping = {
+    _count: OrderItemToppingCountAggregateOutputType | null
+    _avg: OrderItemToppingAvgAggregateOutputType | null
+    _sum: OrderItemToppingSumAggregateOutputType | null
+    _min: OrderItemToppingMinAggregateOutputType | null
+    _max: OrderItemToppingMaxAggregateOutputType | null
+  }
+
+  export type OrderItemToppingAvgAggregateOutputType = {
+    orderItemId: number | null
+    toppingId: number | null
+  }
+
+  export type OrderItemToppingSumAggregateOutputType = {
+    orderItemId: number | null
+    toppingId: number | null
+  }
+
+  export type OrderItemToppingMinAggregateOutputType = {
+    orderItemId: number | null
+    toppingId: number | null
+  }
+
+  export type OrderItemToppingMaxAggregateOutputType = {
+    orderItemId: number | null
+    toppingId: number | null
+  }
+
+  export type OrderItemToppingCountAggregateOutputType = {
+    orderItemId: number
+    toppingId: number
+    _all: number
+  }
+
+
+  export type OrderItemToppingAvgAggregateInputType = {
+    orderItemId?: true
+    toppingId?: true
+  }
+
+  export type OrderItemToppingSumAggregateInputType = {
+    orderItemId?: true
+    toppingId?: true
+  }
+
+  export type OrderItemToppingMinAggregateInputType = {
+    orderItemId?: true
+    toppingId?: true
+  }
+
+  export type OrderItemToppingMaxAggregateInputType = {
+    orderItemId?: true
+    toppingId?: true
+  }
+
+  export type OrderItemToppingCountAggregateInputType = {
+    orderItemId?: true
+    toppingId?: true
+    _all?: true
+  }
+
+  export type OrderItemToppingAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrderItemTopping to aggregate.
+     */
+    where?: OrderItemToppingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrderItemToppings to fetch.
+     */
+    orderBy?: OrderItemToppingOrderByWithRelationInput | OrderItemToppingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: OrderItemToppingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrderItemToppings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrderItemToppings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned OrderItemToppings
+    **/
+    _count?: true | OrderItemToppingCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: OrderItemToppingAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: OrderItemToppingSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: OrderItemToppingMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: OrderItemToppingMaxAggregateInputType
+  }
+
+  export type GetOrderItemToppingAggregateType<T extends OrderItemToppingAggregateArgs> = {
+        [P in keyof T & keyof AggregateOrderItemTopping]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateOrderItemTopping[P]>
+      : GetScalarType<T[P], AggregateOrderItemTopping[P]>
+  }
+
+
+
+
+  export type OrderItemToppingGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: OrderItemToppingWhereInput
+    orderBy?: OrderItemToppingOrderByWithAggregationInput | OrderItemToppingOrderByWithAggregationInput[]
+    by: OrderItemToppingScalarFieldEnum[] | OrderItemToppingScalarFieldEnum
+    having?: OrderItemToppingScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: OrderItemToppingCountAggregateInputType | true
+    _avg?: OrderItemToppingAvgAggregateInputType
+    _sum?: OrderItemToppingSumAggregateInputType
+    _min?: OrderItemToppingMinAggregateInputType
+    _max?: OrderItemToppingMaxAggregateInputType
+  }
+
+  export type OrderItemToppingGroupByOutputType = {
+    orderItemId: number
+    toppingId: number
+    _count: OrderItemToppingCountAggregateOutputType | null
+    _avg: OrderItemToppingAvgAggregateOutputType | null
+    _sum: OrderItemToppingSumAggregateOutputType | null
+    _min: OrderItemToppingMinAggregateOutputType | null
+    _max: OrderItemToppingMaxAggregateOutputType | null
+  }
+
+  type GetOrderItemToppingGroupByPayload<T extends OrderItemToppingGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<OrderItemToppingGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof OrderItemToppingGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], OrderItemToppingGroupByOutputType[P]>
+            : GetScalarType<T[P], OrderItemToppingGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type OrderItemToppingSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    orderItemId?: boolean
+    toppingId?: boolean
+    orderItems?: boolean | OrderItemDefaultArgs<ExtArgs>
+    topping?: boolean | ToppingDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["orderItemTopping"]>
+
+
+
+  export type OrderItemToppingSelectScalar = {
+    orderItemId?: boolean
+    toppingId?: boolean
+  }
+
+  export type OrderItemToppingOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"orderItemId" | "toppingId", ExtArgs["result"]["orderItemTopping"]>
+  export type OrderItemToppingInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    orderItems?: boolean | OrderItemDefaultArgs<ExtArgs>
+    topping?: boolean | ToppingDefaultArgs<ExtArgs>
+  }
+
+  export type $OrderItemToppingPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "OrderItemTopping"
+    objects: {
+      orderItems: Prisma.$OrderItemPayload<ExtArgs>
+      topping: Prisma.$ToppingPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      orderItemId: number
+      toppingId: number
+    }, ExtArgs["result"]["orderItemTopping"]>
+    composites: {}
+  }
+
+  type OrderItemToppingGetPayload<S extends boolean | null | undefined | OrderItemToppingDefaultArgs> = $Result.GetResult<Prisma.$OrderItemToppingPayload, S>
+
+  type OrderItemToppingCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<OrderItemToppingFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: OrderItemToppingCountAggregateInputType | true
+    }
+
+  export interface OrderItemToppingDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['OrderItemTopping'], meta: { name: 'OrderItemTopping' } }
+    /**
+     * Find zero or one OrderItemTopping that matches the filter.
+     * @param {OrderItemToppingFindUniqueArgs} args - Arguments to find a OrderItemTopping
+     * @example
+     * // Get one OrderItemTopping
+     * const orderItemTopping = await prisma.orderItemTopping.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends OrderItemToppingFindUniqueArgs>(args: SelectSubset<T, OrderItemToppingFindUniqueArgs<ExtArgs>>): Prisma__OrderItemToppingClient<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one OrderItemTopping that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {OrderItemToppingFindUniqueOrThrowArgs} args - Arguments to find a OrderItemTopping
+     * @example
+     * // Get one OrderItemTopping
+     * const orderItemTopping = await prisma.orderItemTopping.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends OrderItemToppingFindUniqueOrThrowArgs>(args: SelectSubset<T, OrderItemToppingFindUniqueOrThrowArgs<ExtArgs>>): Prisma__OrderItemToppingClient<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OrderItemTopping that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderItemToppingFindFirstArgs} args - Arguments to find a OrderItemTopping
+     * @example
+     * // Get one OrderItemTopping
+     * const orderItemTopping = await prisma.orderItemTopping.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends OrderItemToppingFindFirstArgs>(args?: SelectSubset<T, OrderItemToppingFindFirstArgs<ExtArgs>>): Prisma__OrderItemToppingClient<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first OrderItemTopping that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderItemToppingFindFirstOrThrowArgs} args - Arguments to find a OrderItemTopping
+     * @example
+     * // Get one OrderItemTopping
+     * const orderItemTopping = await prisma.orderItemTopping.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends OrderItemToppingFindFirstOrThrowArgs>(args?: SelectSubset<T, OrderItemToppingFindFirstOrThrowArgs<ExtArgs>>): Prisma__OrderItemToppingClient<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more OrderItemToppings that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderItemToppingFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all OrderItemToppings
+     * const orderItemToppings = await prisma.orderItemTopping.findMany()
+     * 
+     * // Get first 10 OrderItemToppings
+     * const orderItemToppings = await prisma.orderItemTopping.findMany({ take: 10 })
+     * 
+     * // Only select the `orderItemId`
+     * const orderItemToppingWithOrderItemIdOnly = await prisma.orderItemTopping.findMany({ select: { orderItemId: true } })
+     * 
+     */
+    findMany<T extends OrderItemToppingFindManyArgs>(args?: SelectSubset<T, OrderItemToppingFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a OrderItemTopping.
+     * @param {OrderItemToppingCreateArgs} args - Arguments to create a OrderItemTopping.
+     * @example
+     * // Create one OrderItemTopping
+     * const OrderItemTopping = await prisma.orderItemTopping.create({
+     *   data: {
+     *     // ... data to create a OrderItemTopping
+     *   }
+     * })
+     * 
+     */
+    create<T extends OrderItemToppingCreateArgs>(args: SelectSubset<T, OrderItemToppingCreateArgs<ExtArgs>>): Prisma__OrderItemToppingClient<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many OrderItemToppings.
+     * @param {OrderItemToppingCreateManyArgs} args - Arguments to create many OrderItemToppings.
+     * @example
+     * // Create many OrderItemToppings
+     * const orderItemTopping = await prisma.orderItemTopping.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends OrderItemToppingCreateManyArgs>(args?: SelectSubset<T, OrderItemToppingCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Delete a OrderItemTopping.
+     * @param {OrderItemToppingDeleteArgs} args - Arguments to delete one OrderItemTopping.
+     * @example
+     * // Delete one OrderItemTopping
+     * const OrderItemTopping = await prisma.orderItemTopping.delete({
+     *   where: {
+     *     // ... filter to delete one OrderItemTopping
+     *   }
+     * })
+     * 
+     */
+    delete<T extends OrderItemToppingDeleteArgs>(args: SelectSubset<T, OrderItemToppingDeleteArgs<ExtArgs>>): Prisma__OrderItemToppingClient<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one OrderItemTopping.
+     * @param {OrderItemToppingUpdateArgs} args - Arguments to update one OrderItemTopping.
+     * @example
+     * // Update one OrderItemTopping
+     * const orderItemTopping = await prisma.orderItemTopping.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends OrderItemToppingUpdateArgs>(args: SelectSubset<T, OrderItemToppingUpdateArgs<ExtArgs>>): Prisma__OrderItemToppingClient<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more OrderItemToppings.
+     * @param {OrderItemToppingDeleteManyArgs} args - Arguments to filter OrderItemToppings to delete.
+     * @example
+     * // Delete a few OrderItemToppings
+     * const { count } = await prisma.orderItemTopping.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends OrderItemToppingDeleteManyArgs>(args?: SelectSubset<T, OrderItemToppingDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more OrderItemToppings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderItemToppingUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many OrderItemToppings
+     * const orderItemTopping = await prisma.orderItemTopping.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends OrderItemToppingUpdateManyArgs>(args: SelectSubset<T, OrderItemToppingUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create or update one OrderItemTopping.
+     * @param {OrderItemToppingUpsertArgs} args - Arguments to update or create a OrderItemTopping.
+     * @example
+     * // Update or create a OrderItemTopping
+     * const orderItemTopping = await prisma.orderItemTopping.upsert({
+     *   create: {
+     *     // ... data to create a OrderItemTopping
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the OrderItemTopping we want to update
+     *   }
+     * })
+     */
+    upsert<T extends OrderItemToppingUpsertArgs>(args: SelectSubset<T, OrderItemToppingUpsertArgs<ExtArgs>>): Prisma__OrderItemToppingClient<$Result.GetResult<Prisma.$OrderItemToppingPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of OrderItemToppings.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderItemToppingCountArgs} args - Arguments to filter OrderItemToppings to count.
+     * @example
+     * // Count the number of OrderItemToppings
+     * const count = await prisma.orderItemTopping.count({
+     *   where: {
+     *     // ... the filter for the OrderItemToppings we want to count
+     *   }
+     * })
+    **/
+    count<T extends OrderItemToppingCountArgs>(
+      args?: Subset<T, OrderItemToppingCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], OrderItemToppingCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a OrderItemTopping.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderItemToppingAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends OrderItemToppingAggregateArgs>(args: Subset<T, OrderItemToppingAggregateArgs>): Prisma.PrismaPromise<GetOrderItemToppingAggregateType<T>>
+
+    /**
+     * Group by OrderItemTopping.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {OrderItemToppingGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends OrderItemToppingGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: OrderItemToppingGroupByArgs['orderBy'] }
+        : { orderBy?: OrderItemToppingGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, OrderItemToppingGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetOrderItemToppingGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the OrderItemTopping model
+   */
+  readonly fields: OrderItemToppingFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for OrderItemTopping.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__OrderItemToppingClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    orderItems<T extends OrderItemDefaultArgs<ExtArgs> = {}>(args?: Subset<T, OrderItemDefaultArgs<ExtArgs>>): Prisma__OrderItemClient<$Result.GetResult<Prisma.$OrderItemPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    topping<T extends ToppingDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ToppingDefaultArgs<ExtArgs>>): Prisma__ToppingClient<$Result.GetResult<Prisma.$ToppingPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the OrderItemTopping model
+   */
+  interface OrderItemToppingFieldRefs {
+    readonly orderItemId: FieldRef<"OrderItemTopping", 'Int'>
+    readonly toppingId: FieldRef<"OrderItemTopping", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * OrderItemTopping findUnique
+   */
+  export type OrderItemToppingFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    /**
+     * Filter, which OrderItemTopping to fetch.
+     */
+    where: OrderItemToppingWhereUniqueInput
+  }
+
+  /**
+   * OrderItemTopping findUniqueOrThrow
+   */
+  export type OrderItemToppingFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    /**
+     * Filter, which OrderItemTopping to fetch.
+     */
+    where: OrderItemToppingWhereUniqueInput
+  }
+
+  /**
+   * OrderItemTopping findFirst
+   */
+  export type OrderItemToppingFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    /**
+     * Filter, which OrderItemTopping to fetch.
+     */
+    where?: OrderItemToppingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrderItemToppings to fetch.
+     */
+    orderBy?: OrderItemToppingOrderByWithRelationInput | OrderItemToppingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OrderItemToppings.
+     */
+    cursor?: OrderItemToppingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrderItemToppings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrderItemToppings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrderItemToppings.
+     */
+    distinct?: OrderItemToppingScalarFieldEnum | OrderItemToppingScalarFieldEnum[]
+  }
+
+  /**
+   * OrderItemTopping findFirstOrThrow
+   */
+  export type OrderItemToppingFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    /**
+     * Filter, which OrderItemTopping to fetch.
+     */
+    where?: OrderItemToppingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrderItemToppings to fetch.
+     */
+    orderBy?: OrderItemToppingOrderByWithRelationInput | OrderItemToppingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for OrderItemToppings.
+     */
+    cursor?: OrderItemToppingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrderItemToppings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrderItemToppings.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of OrderItemToppings.
+     */
+    distinct?: OrderItemToppingScalarFieldEnum | OrderItemToppingScalarFieldEnum[]
+  }
+
+  /**
+   * OrderItemTopping findMany
+   */
+  export type OrderItemToppingFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    /**
+     * Filter, which OrderItemToppings to fetch.
+     */
+    where?: OrderItemToppingWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of OrderItemToppings to fetch.
+     */
+    orderBy?: OrderItemToppingOrderByWithRelationInput | OrderItemToppingOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing OrderItemToppings.
+     */
+    cursor?: OrderItemToppingWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` OrderItemToppings from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` OrderItemToppings.
+     */
+    skip?: number
+    distinct?: OrderItemToppingScalarFieldEnum | OrderItemToppingScalarFieldEnum[]
+  }
+
+  /**
+   * OrderItemTopping create
+   */
+  export type OrderItemToppingCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    /**
+     * The data needed to create a OrderItemTopping.
+     */
+    data: XOR<OrderItemToppingCreateInput, OrderItemToppingUncheckedCreateInput>
+  }
+
+  /**
+   * OrderItemTopping createMany
+   */
+  export type OrderItemToppingCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many OrderItemToppings.
+     */
+    data: OrderItemToppingCreateManyInput | OrderItemToppingCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * OrderItemTopping update
+   */
+  export type OrderItemToppingUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    /**
+     * The data needed to update a OrderItemTopping.
+     */
+    data: XOR<OrderItemToppingUpdateInput, OrderItemToppingUncheckedUpdateInput>
+    /**
+     * Choose, which OrderItemTopping to update.
+     */
+    where: OrderItemToppingWhereUniqueInput
+  }
+
+  /**
+   * OrderItemTopping updateMany
+   */
+  export type OrderItemToppingUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update OrderItemToppings.
+     */
+    data: XOR<OrderItemToppingUpdateManyMutationInput, OrderItemToppingUncheckedUpdateManyInput>
+    /**
+     * Filter which OrderItemToppings to update
+     */
+    where?: OrderItemToppingWhereInput
+    /**
+     * Limit how many OrderItemToppings to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * OrderItemTopping upsert
+   */
+  export type OrderItemToppingUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    /**
+     * The filter to search for the OrderItemTopping to update in case it exists.
+     */
+    where: OrderItemToppingWhereUniqueInput
+    /**
+     * In case the OrderItemTopping found by the `where` argument doesn't exist, create a new OrderItemTopping with this data.
+     */
+    create: XOR<OrderItemToppingCreateInput, OrderItemToppingUncheckedCreateInput>
+    /**
+     * In case the OrderItemTopping was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<OrderItemToppingUpdateInput, OrderItemToppingUncheckedUpdateInput>
+  }
+
+  /**
+   * OrderItemTopping delete
+   */
+  export type OrderItemToppingDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
+    /**
+     * Filter which OrderItemTopping to delete.
+     */
+    where: OrderItemToppingWhereUniqueInput
+  }
+
+  /**
+   * OrderItemTopping deleteMany
+   */
+  export type OrderItemToppingDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which OrderItemToppings to delete
+     */
+    where?: OrderItemToppingWhereInput
+    /**
+     * Limit how many OrderItemToppings to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * OrderItemTopping without action
+   */
+  export type OrderItemToppingDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the OrderItemTopping
+     */
+    select?: OrderItemToppingSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the OrderItemTopping
+     */
+    omit?: OrderItemToppingOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: OrderItemToppingInclude<ExtArgs> | null
   }
 
 
@@ -5261,6 +7496,8 @@ export namespace Prisma {
     name: 'name',
     email: 'email',
     password: 'password',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
     role: 'role'
   };
 
@@ -5278,7 +7515,7 @@ export namespace Prisma {
 
 
   export const OrderScalarFieldEnum: {
-    id: 'id',
+    order_id: 'order_id',
     status: 'status',
     totalPrice: 'totalPrice',
     createdAt: 'createdAt',
@@ -5291,13 +7528,34 @@ export namespace Prisma {
 
   export const OrderItemScalarFieldEnum: {
     id: 'id',
-    quantity: 'quantity',
+    qty: 'qty',
     totalPriceItem: 'totalPriceItem',
     menuItemId: 'menuItemId',
-    orderId: 'orderId'
+    orderId: 'orderId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   };
 
   export type OrderItemScalarFieldEnum = (typeof OrderItemScalarFieldEnum)[keyof typeof OrderItemScalarFieldEnum]
+
+
+  export const ToppingScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    priceTopping: 'priceTopping',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ToppingScalarFieldEnum = (typeof ToppingScalarFieldEnum)[keyof typeof ToppingScalarFieldEnum]
+
+
+  export const OrderItemToppingScalarFieldEnum: {
+    orderItemId: 'orderItemId',
+    toppingId: 'toppingId'
+  };
+
+  export type OrderItemToppingScalarFieldEnum = (typeof OrderItemToppingScalarFieldEnum)[keyof typeof OrderItemToppingScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -5333,6 +7591,13 @@ export namespace Prisma {
   export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 
 
+  export const ToppingOrderByRelevanceFieldEnum: {
+    name: 'name'
+  };
+
+  export type ToppingOrderByRelevanceFieldEnum = (typeof ToppingOrderByRelevanceFieldEnum)[keyof typeof ToppingOrderByRelevanceFieldEnum]
+
+
   /**
    * Field references
    */
@@ -5353,6 +7618,13 @@ export namespace Prisma {
 
 
   /**
+   * Reference to a field of type 'DateTime'
+   */
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+    
+
+
+  /**
    * Reference to a field of type 'Role'
    */
   export type EnumRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Role'>
@@ -5360,9 +7632,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Float'
+   * Reference to a field of type 'Decimal'
    */
-  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 
@@ -5374,9 +7646,9 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DateTime'
+   * Reference to a field of type 'Float'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
     
   /**
    * Deep Input Types
@@ -5391,6 +7663,8 @@ export namespace Prisma {
     name?: StringFilter<"User"> | string
     email?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     orders?: OrderListRelationFilter
   }
@@ -5400,6 +7674,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     role?: SortOrder
     orders?: OrderOrderByRelationAggregateInput
     _relevance?: UserOrderByRelevanceInput
@@ -5413,6 +7689,8 @@ export namespace Prisma {
     NOT?: UserWhereInput | UserWhereInput[]
     name?: StringFilter<"User"> | string
     password?: StringFilter<"User"> | string
+    createdAt?: DateTimeFilter<"User"> | Date | string
+    updatedAt?: DateTimeFilter<"User"> | Date | string
     role?: EnumRoleFilter<"User"> | $Enums.Role
     orders?: OrderListRelationFilter
   }, "id" | "email">
@@ -5422,6 +7700,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     role?: SortOrder
     _count?: UserCountOrderByAggregateInput
     _avg?: UserAvgOrderByAggregateInput
@@ -5438,6 +7718,8 @@ export namespace Prisma {
     name?: StringWithAggregatesFilter<"User"> | string
     email?: StringWithAggregatesFilter<"User"> | string
     password?: StringWithAggregatesFilter<"User"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     role?: EnumRoleWithAggregatesFilter<"User"> | $Enums.Role
   }
 
@@ -5447,7 +7729,7 @@ export namespace Prisma {
     NOT?: MenuItemWhereInput | MenuItemWhereInput[]
     item_id?: IntFilter<"MenuItem"> | number
     name?: StringFilter<"MenuItem"> | string
-    price?: FloatFilter<"MenuItem"> | number
+    price?: DecimalFilter<"MenuItem"> | Decimal | DecimalJsLike | number | string
     img?: StringFilter<"MenuItem"> | string
     orderItems?: OrderItemListRelationFilter
   }
@@ -5467,7 +7749,7 @@ export namespace Prisma {
     OR?: MenuItemWhereInput[]
     NOT?: MenuItemWhereInput | MenuItemWhereInput[]
     name?: StringFilter<"MenuItem"> | string
-    price?: FloatFilter<"MenuItem"> | number
+    price?: DecimalFilter<"MenuItem"> | Decimal | DecimalJsLike | number | string
     img?: StringFilter<"MenuItem"> | string
     orderItems?: OrderItemListRelationFilter
   }, "item_id">
@@ -5490,7 +7772,7 @@ export namespace Prisma {
     NOT?: MenuItemScalarWhereWithAggregatesInput | MenuItemScalarWhereWithAggregatesInput[]
     item_id?: IntWithAggregatesFilter<"MenuItem"> | number
     name?: StringWithAggregatesFilter<"MenuItem"> | string
-    price?: FloatWithAggregatesFilter<"MenuItem"> | number
+    price?: DecimalWithAggregatesFilter<"MenuItem"> | Decimal | DecimalJsLike | number | string
     img?: StringWithAggregatesFilter<"MenuItem"> | string
   }
 
@@ -5498,43 +7780,43 @@ export namespace Prisma {
     AND?: OrderWhereInput | OrderWhereInput[]
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
-    id?: IntFilter<"Order"> | number
+    order_id?: IntFilter<"Order"> | number
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
-    totalPrice?: FloatFilter<"Order"> | number
+    totalPrice?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     completedAt?: DateTimeNullableFilter<"Order"> | Date | string | null
     userId?: IntNullableFilter<"Order"> | number | null
-    orderitem?: OrderItemListRelationFilter
+    orderItems?: OrderItemListRelationFilter
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
   }
 
   export type OrderOrderByWithRelationInput = {
-    id?: SortOrder
+    order_id?: SortOrder
     status?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
     completedAt?: SortOrderInput | SortOrder
     userId?: SortOrderInput | SortOrder
-    orderitem?: OrderItemOrderByRelationAggregateInput
+    orderItems?: OrderItemOrderByRelationAggregateInput
     User?: UserOrderByWithRelationInput
   }
 
   export type OrderWhereUniqueInput = Prisma.AtLeast<{
-    id?: number
+    order_id?: number
     AND?: OrderWhereInput | OrderWhereInput[]
     OR?: OrderWhereInput[]
     NOT?: OrderWhereInput | OrderWhereInput[]
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
-    totalPrice?: FloatFilter<"Order"> | number
+    totalPrice?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     completedAt?: DateTimeNullableFilter<"Order"> | Date | string | null
     userId?: IntNullableFilter<"Order"> | number | null
-    orderitem?: OrderItemListRelationFilter
+    orderItems?: OrderItemListRelationFilter
     User?: XOR<UserNullableScalarRelationFilter, UserWhereInput> | null
-  }, "id">
+  }, "order_id">
 
   export type OrderOrderByWithAggregationInput = {
-    id?: SortOrder
+    order_id?: SortOrder
     status?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
@@ -5551,9 +7833,9 @@ export namespace Prisma {
     AND?: OrderScalarWhereWithAggregatesInput | OrderScalarWhereWithAggregatesInput[]
     OR?: OrderScalarWhereWithAggregatesInput[]
     NOT?: OrderScalarWhereWithAggregatesInput | OrderScalarWhereWithAggregatesInput[]
-    id?: IntWithAggregatesFilter<"Order"> | number
+    order_id?: IntWithAggregatesFilter<"Order"> | number
     status?: EnumOrderStatusWithAggregatesFilter<"Order"> | $Enums.OrderStatus
-    totalPrice?: FloatWithAggregatesFilter<"Order"> | number
+    totalPrice?: DecimalWithAggregatesFilter<"Order"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeWithAggregatesFilter<"Order"> | Date | string
     completedAt?: DateTimeNullableWithAggregatesFilter<"Order"> | Date | string | null
     userId?: IntNullableWithAggregatesFilter<"Order"> | number | null
@@ -5564,22 +7846,28 @@ export namespace Prisma {
     OR?: OrderItemWhereInput[]
     NOT?: OrderItemWhereInput | OrderItemWhereInput[]
     id?: IntFilter<"OrderItem"> | number
-    quantity?: IntFilter<"OrderItem"> | number
-    totalPriceItem?: FloatFilter<"OrderItem"> | number
+    qty?: IntFilter<"OrderItem"> | number
+    totalPriceItem?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
     menuItemId?: IntNullableFilter<"OrderItem"> | number | null
     orderId?: IntNullableFilter<"OrderItem"> | number | null
+    createdAt?: DateTimeFilter<"OrderItem"> | Date | string
+    updatedAt?: DateTimeFilter<"OrderItem"> | Date | string
     menuItem?: XOR<MenuItemNullableScalarRelationFilter, MenuItemWhereInput> | null
     order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
+    orderItemToppings?: OrderItemToppingListRelationFilter
   }
 
   export type OrderItemOrderByWithRelationInput = {
     id?: SortOrder
-    quantity?: SortOrder
+    qty?: SortOrder
     totalPriceItem?: SortOrder
     menuItemId?: SortOrderInput | SortOrder
     orderId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     menuItem?: MenuItemOrderByWithRelationInput
     order?: OrderOrderByWithRelationInput
+    orderItemToppings?: OrderItemToppingOrderByRelationAggregateInput
   }
 
   export type OrderItemWhereUniqueInput = Prisma.AtLeast<{
@@ -5587,20 +7875,25 @@ export namespace Prisma {
     AND?: OrderItemWhereInput | OrderItemWhereInput[]
     OR?: OrderItemWhereInput[]
     NOT?: OrderItemWhereInput | OrderItemWhereInput[]
-    quantity?: IntFilter<"OrderItem"> | number
-    totalPriceItem?: FloatFilter<"OrderItem"> | number
+    qty?: IntFilter<"OrderItem"> | number
+    totalPriceItem?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
     menuItemId?: IntNullableFilter<"OrderItem"> | number | null
     orderId?: IntNullableFilter<"OrderItem"> | number | null
+    createdAt?: DateTimeFilter<"OrderItem"> | Date | string
+    updatedAt?: DateTimeFilter<"OrderItem"> | Date | string
     menuItem?: XOR<MenuItemNullableScalarRelationFilter, MenuItemWhereInput> | null
     order?: XOR<OrderNullableScalarRelationFilter, OrderWhereInput> | null
+    orderItemToppings?: OrderItemToppingListRelationFilter
   }, "id">
 
   export type OrderItemOrderByWithAggregationInput = {
     id?: SortOrder
-    quantity?: SortOrder
+    qty?: SortOrder
     totalPriceItem?: SortOrder
     menuItemId?: SortOrderInput | SortOrder
     orderId?: SortOrderInput | SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     _count?: OrderItemCountOrderByAggregateInput
     _avg?: OrderItemAvgOrderByAggregateInput
     _max?: OrderItemMaxOrderByAggregateInput
@@ -5613,16 +7906,124 @@ export namespace Prisma {
     OR?: OrderItemScalarWhereWithAggregatesInput[]
     NOT?: OrderItemScalarWhereWithAggregatesInput | OrderItemScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"OrderItem"> | number
-    quantity?: IntWithAggregatesFilter<"OrderItem"> | number
-    totalPriceItem?: FloatWithAggregatesFilter<"OrderItem"> | number
+    qty?: IntWithAggregatesFilter<"OrderItem"> | number
+    totalPriceItem?: DecimalWithAggregatesFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
     menuItemId?: IntNullableWithAggregatesFilter<"OrderItem"> | number | null
     orderId?: IntNullableWithAggregatesFilter<"OrderItem"> | number | null
+    createdAt?: DateTimeWithAggregatesFilter<"OrderItem"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"OrderItem"> | Date | string
+  }
+
+  export type ToppingWhereInput = {
+    AND?: ToppingWhereInput | ToppingWhereInput[]
+    OR?: ToppingWhereInput[]
+    NOT?: ToppingWhereInput | ToppingWhereInput[]
+    id?: IntFilter<"Topping"> | number
+    name?: StringFilter<"Topping"> | string
+    priceTopping?: DecimalFilter<"Topping"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"Topping"> | Date | string
+    updatedAt?: DateTimeFilter<"Topping"> | Date | string
+    orderItemToppings?: OrderItemToppingListRelationFilter
+  }
+
+  export type ToppingOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    priceTopping?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    orderItemToppings?: OrderItemToppingOrderByRelationAggregateInput
+    _relevance?: ToppingOrderByRelevanceInput
+  }
+
+  export type ToppingWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: ToppingWhereInput | ToppingWhereInput[]
+    OR?: ToppingWhereInput[]
+    NOT?: ToppingWhereInput | ToppingWhereInput[]
+    name?: StringFilter<"Topping"> | string
+    priceTopping?: DecimalFilter<"Topping"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFilter<"Topping"> | Date | string
+    updatedAt?: DateTimeFilter<"Topping"> | Date | string
+    orderItemToppings?: OrderItemToppingListRelationFilter
+  }, "id">
+
+  export type ToppingOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    priceTopping?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ToppingCountOrderByAggregateInput
+    _avg?: ToppingAvgOrderByAggregateInput
+    _max?: ToppingMaxOrderByAggregateInput
+    _min?: ToppingMinOrderByAggregateInput
+    _sum?: ToppingSumOrderByAggregateInput
+  }
+
+  export type ToppingScalarWhereWithAggregatesInput = {
+    AND?: ToppingScalarWhereWithAggregatesInput | ToppingScalarWhereWithAggregatesInput[]
+    OR?: ToppingScalarWhereWithAggregatesInput[]
+    NOT?: ToppingScalarWhereWithAggregatesInput | ToppingScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Topping"> | number
+    name?: StringWithAggregatesFilter<"Topping"> | string
+    priceTopping?: DecimalWithAggregatesFilter<"Topping"> | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeWithAggregatesFilter<"Topping"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Topping"> | Date | string
+  }
+
+  export type OrderItemToppingWhereInput = {
+    AND?: OrderItemToppingWhereInput | OrderItemToppingWhereInput[]
+    OR?: OrderItemToppingWhereInput[]
+    NOT?: OrderItemToppingWhereInput | OrderItemToppingWhereInput[]
+    orderItemId?: IntFilter<"OrderItemTopping"> | number
+    toppingId?: IntFilter<"OrderItemTopping"> | number
+    orderItems?: XOR<OrderItemScalarRelationFilter, OrderItemWhereInput>
+    topping?: XOR<ToppingScalarRelationFilter, ToppingWhereInput>
+  }
+
+  export type OrderItemToppingOrderByWithRelationInput = {
+    orderItemId?: SortOrder
+    toppingId?: SortOrder
+    orderItems?: OrderItemOrderByWithRelationInput
+    topping?: ToppingOrderByWithRelationInput
+  }
+
+  export type OrderItemToppingWhereUniqueInput = Prisma.AtLeast<{
+    orderItemId_toppingId?: OrderItemToppingOrderItemIdToppingIdCompoundUniqueInput
+    AND?: OrderItemToppingWhereInput | OrderItemToppingWhereInput[]
+    OR?: OrderItemToppingWhereInput[]
+    NOT?: OrderItemToppingWhereInput | OrderItemToppingWhereInput[]
+    orderItemId?: IntFilter<"OrderItemTopping"> | number
+    toppingId?: IntFilter<"OrderItemTopping"> | number
+    orderItems?: XOR<OrderItemScalarRelationFilter, OrderItemWhereInput>
+    topping?: XOR<ToppingScalarRelationFilter, ToppingWhereInput>
+  }, "orderItemId_toppingId">
+
+  export type OrderItemToppingOrderByWithAggregationInput = {
+    orderItemId?: SortOrder
+    toppingId?: SortOrder
+    _count?: OrderItemToppingCountOrderByAggregateInput
+    _avg?: OrderItemToppingAvgOrderByAggregateInput
+    _max?: OrderItemToppingMaxOrderByAggregateInput
+    _min?: OrderItemToppingMinOrderByAggregateInput
+    _sum?: OrderItemToppingSumOrderByAggregateInput
+  }
+
+  export type OrderItemToppingScalarWhereWithAggregatesInput = {
+    AND?: OrderItemToppingScalarWhereWithAggregatesInput | OrderItemToppingScalarWhereWithAggregatesInput[]
+    OR?: OrderItemToppingScalarWhereWithAggregatesInput[]
+    NOT?: OrderItemToppingScalarWhereWithAggregatesInput | OrderItemToppingScalarWhereWithAggregatesInput[]
+    orderItemId?: IntWithAggregatesFilter<"OrderItemTopping"> | number
+    toppingId?: IntWithAggregatesFilter<"OrderItemTopping"> | number
   }
 
   export type UserCreateInput = {
     name: string
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     role?: $Enums.Role
     orders?: OrderCreateNestedManyWithoutUserInput
   }
@@ -5632,6 +8033,8 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     role?: $Enums.Role
     orders?: OrderUncheckedCreateNestedManyWithoutUserInput
   }
@@ -5640,6 +8043,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     orders?: OrderUpdateManyWithoutUserNestedInput
   }
@@ -5649,6 +8054,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
     orders?: OrderUncheckedUpdateManyWithoutUserNestedInput
   }
@@ -5658,6 +8065,8 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     role?: $Enums.Role
   }
 
@@ -5665,6 +8074,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
@@ -5673,12 +8084,14 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type MenuItemCreateInput = {
     name: string
-    price: number
+    price: Decimal | DecimalJsLike | number | string
     img: string
     orderItems?: OrderItemCreateNestedManyWithoutMenuItemInput
   }
@@ -5686,14 +8099,14 @@ export namespace Prisma {
   export type MenuItemUncheckedCreateInput = {
     item_id?: number
     name: string
-    price: number
+    price: Decimal | DecimalJsLike | number | string
     img: string
     orderItems?: OrderItemUncheckedCreateNestedManyWithoutMenuItemInput
   }
 
   export type MenuItemUpdateInput = {
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     img?: StringFieldUpdateOperationsInput | string
     orderItems?: OrderItemUpdateManyWithoutMenuItemNestedInput
   }
@@ -5701,7 +8114,7 @@ export namespace Prisma {
   export type MenuItemUncheckedUpdateInput = {
     item_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     img?: StringFieldUpdateOperationsInput | string
     orderItems?: OrderItemUncheckedUpdateManyWithoutMenuItemNestedInput
   }
@@ -5709,65 +8122,65 @@ export namespace Prisma {
   export type MenuItemCreateManyInput = {
     item_id?: number
     name: string
-    price: number
+    price: Decimal | DecimalJsLike | number | string
     img: string
   }
 
   export type MenuItemUpdateManyMutationInput = {
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     img?: StringFieldUpdateOperationsInput | string
   }
 
   export type MenuItemUncheckedUpdateManyInput = {
     item_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     img?: StringFieldUpdateOperationsInput | string
   }
 
   export type OrderCreateInput = {
     status?: $Enums.OrderStatus
-    totalPrice: number
+    totalPrice: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     completedAt?: Date | string | null
-    orderitem?: OrderItemCreateNestedManyWithoutOrderInput
+    orderItems?: OrderItemCreateNestedManyWithoutOrderInput
     User?: UserCreateNestedOneWithoutOrdersInput
   }
 
   export type OrderUncheckedCreateInput = {
-    id?: number
+    order_id?: number
     status?: $Enums.OrderStatus
-    totalPrice: number
+    totalPrice: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     completedAt?: Date | string | null
     userId?: number | null
-    orderitem?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
+    orderItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUpdateInput = {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    orderitem?: OrderItemUpdateManyWithoutOrderNestedInput
+    orderItems?: OrderItemUpdateManyWithoutOrderNestedInput
     User?: UserUpdateOneWithoutOrdersNestedInput
   }
 
   export type OrderUncheckedUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    order_id?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableIntFieldUpdateOperationsInput | number | null
-    orderitem?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    orderItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderCreateManyInput = {
-    id?: number
+    order_id?: number
     status?: $Enums.OrderStatus
-    totalPrice: number
+    totalPrice: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     completedAt?: Date | string | null
     userId?: number | null
@@ -5775,69 +8188,178 @@ export namespace Prisma {
 
   export type OrderUpdateManyMutationInput = {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OrderUncheckedUpdateManyInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    order_id?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type OrderItemCreateInput = {
-    quantity: number
-    totalPriceItem: number
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     menuItem?: MenuItemCreateNestedOneWithoutOrderItemsInput
-    order?: OrderCreateNestedOneWithoutOrderitemInput
+    order?: OrderCreateNestedOneWithoutOrderItemsInput
+    orderItemToppings?: OrderItemToppingCreateNestedManyWithoutOrderItemsInput
   }
 
   export type OrderItemUncheckedCreateInput = {
     id?: number
-    quantity: number
-    totalPriceItem: number
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
     menuItemId?: number | null
     orderId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orderItemToppings?: OrderItemToppingUncheckedCreateNestedManyWithoutOrderItemsInput
   }
 
   export type OrderItemUpdateInput = {
-    quantity?: IntFieldUpdateOperationsInput | number
-    totalPriceItem?: FloatFieldUpdateOperationsInput | number
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     menuItem?: MenuItemUpdateOneWithoutOrderItemsNestedInput
-    order?: OrderUpdateOneWithoutOrderitemNestedInput
+    order?: OrderUpdateOneWithoutOrderItemsNestedInput
+    orderItemToppings?: OrderItemToppingUpdateManyWithoutOrderItemsNestedInput
   }
 
   export type OrderItemUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
-    totalPriceItem?: FloatFieldUpdateOperationsInput | number
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     menuItemId?: NullableIntFieldUpdateOperationsInput | number | null
     orderId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orderItemToppings?: OrderItemToppingUncheckedUpdateManyWithoutOrderItemsNestedInput
   }
 
   export type OrderItemCreateManyInput = {
     id?: number
-    quantity: number
-    totalPriceItem: number
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
     menuItemId?: number | null
     orderId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type OrderItemUpdateManyMutationInput = {
-    quantity?: IntFieldUpdateOperationsInput | number
-    totalPriceItem?: FloatFieldUpdateOperationsInput | number
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderItemUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
-    totalPriceItem?: FloatFieldUpdateOperationsInput | number
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     menuItemId?: NullableIntFieldUpdateOperationsInput | number | null
     orderId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ToppingCreateInput = {
+    name: string
+    priceTopping: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orderItemToppings?: OrderItemToppingCreateNestedManyWithoutToppingInput
+  }
+
+  export type ToppingUncheckedCreateInput = {
+    id?: number
+    name: string
+    priceTopping: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orderItemToppings?: OrderItemToppingUncheckedCreateNestedManyWithoutToppingInput
+  }
+
+  export type ToppingUpdateInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    priceTopping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orderItemToppings?: OrderItemToppingUpdateManyWithoutToppingNestedInput
+  }
+
+  export type ToppingUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    priceTopping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orderItemToppings?: OrderItemToppingUncheckedUpdateManyWithoutToppingNestedInput
+  }
+
+  export type ToppingCreateManyInput = {
+    id?: number
+    name: string
+    priceTopping: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ToppingUpdateManyMutationInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    priceTopping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ToppingUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    priceTopping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderItemToppingCreateInput = {
+    orderItems: OrderItemCreateNestedOneWithoutOrderItemToppingsInput
+    topping: ToppingCreateNestedOneWithoutOrderItemToppingsInput
+  }
+
+  export type OrderItemToppingUncheckedCreateInput = {
+    orderItemId: number
+    toppingId: number
+  }
+
+  export type OrderItemToppingUpdateInput = {
+    orderItems?: OrderItemUpdateOneRequiredWithoutOrderItemToppingsNestedInput
+    topping?: ToppingUpdateOneRequiredWithoutOrderItemToppingsNestedInput
+  }
+
+  export type OrderItemToppingUncheckedUpdateInput = {
+    orderItemId?: IntFieldUpdateOperationsInput | number
+    toppingId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type OrderItemToppingCreateManyInput = {
+    orderItemId: number
+    toppingId: number
+  }
+
+  export type OrderItemToppingUpdateManyMutationInput = {
+
+  }
+
+  export type OrderItemToppingUncheckedUpdateManyInput = {
+    orderItemId?: IntFieldUpdateOperationsInput | number
+    toppingId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -5864,6 +8386,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type EnumRoleFilter<$PrismaModel = never> = {
@@ -5894,6 +8427,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     role?: SortOrder
   }
 
@@ -5906,6 +8441,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     role?: SortOrder
   }
 
@@ -5914,6 +8451,8 @@ export namespace Prisma {
     name?: SortOrder
     email?: SortOrder
     password?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
     role?: SortOrder
   }
 
@@ -5955,6 +8494,20 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type EnumRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[]
@@ -5965,15 +8518,15 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
-  export type FloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
   }
 
   export type OrderItemListRelationFilter = {
@@ -6023,20 +8576,20 @@ export namespace Prisma {
     price?: SortOrder
   }
 
-  export type FloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type EnumOrderStatusFilter<$PrismaModel = never> = {
@@ -6044,17 +8597,6 @@ export namespace Prisma {
     in?: $Enums.OrderStatus[]
     notIn?: $Enums.OrderStatus[]
     not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
-  }
-
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -6090,7 +8632,7 @@ export namespace Prisma {
   }
 
   export type OrderCountOrderByAggregateInput = {
-    id?: SortOrder
+    order_id?: SortOrder
     status?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
@@ -6099,13 +8641,13 @@ export namespace Prisma {
   }
 
   export type OrderAvgOrderByAggregateInput = {
-    id?: SortOrder
+    order_id?: SortOrder
     totalPrice?: SortOrder
     userId?: SortOrder
   }
 
   export type OrderMaxOrderByAggregateInput = {
-    id?: SortOrder
+    order_id?: SortOrder
     status?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
@@ -6114,7 +8656,7 @@ export namespace Prisma {
   }
 
   export type OrderMinOrderByAggregateInput = {
-    id?: SortOrder
+    order_id?: SortOrder
     status?: SortOrder
     totalPrice?: SortOrder
     createdAt?: SortOrder
@@ -6123,7 +8665,7 @@ export namespace Prisma {
   }
 
   export type OrderSumOrderByAggregateInput = {
-    id?: SortOrder
+    order_id?: SortOrder
     totalPrice?: SortOrder
     userId?: SortOrder
   }
@@ -6136,20 +8678,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumOrderStatusFilter<$PrismaModel>
     _max?: NestedEnumOrderStatusFilter<$PrismaModel>
-  }
-
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6192,17 +8720,29 @@ export namespace Prisma {
     isNot?: OrderWhereInput | null
   }
 
+  export type OrderItemToppingListRelationFilter = {
+    every?: OrderItemToppingWhereInput
+    some?: OrderItemToppingWhereInput
+    none?: OrderItemToppingWhereInput
+  }
+
+  export type OrderItemToppingOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type OrderItemCountOrderByAggregateInput = {
     id?: SortOrder
-    quantity?: SortOrder
+    qty?: SortOrder
     totalPriceItem?: SortOrder
     menuItemId?: SortOrder
     orderId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type OrderItemAvgOrderByAggregateInput = {
     id?: SortOrder
-    quantity?: SortOrder
+    qty?: SortOrder
     totalPriceItem?: SortOrder
     menuItemId?: SortOrder
     orderId?: SortOrder
@@ -6210,26 +8750,110 @@ export namespace Prisma {
 
   export type OrderItemMaxOrderByAggregateInput = {
     id?: SortOrder
-    quantity?: SortOrder
+    qty?: SortOrder
     totalPriceItem?: SortOrder
     menuItemId?: SortOrder
     orderId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type OrderItemMinOrderByAggregateInput = {
     id?: SortOrder
-    quantity?: SortOrder
+    qty?: SortOrder
+    totalPriceItem?: SortOrder
+    menuItemId?: SortOrder
+    orderId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type OrderItemSumOrderByAggregateInput = {
+    id?: SortOrder
+    qty?: SortOrder
     totalPriceItem?: SortOrder
     menuItemId?: SortOrder
     orderId?: SortOrder
   }
 
-  export type OrderItemSumOrderByAggregateInput = {
+  export type ToppingOrderByRelevanceInput = {
+    fields: ToppingOrderByRelevanceFieldEnum | ToppingOrderByRelevanceFieldEnum[]
+    sort: SortOrder
+    search: string
+  }
+
+  export type ToppingCountOrderByAggregateInput = {
     id?: SortOrder
-    quantity?: SortOrder
-    totalPriceItem?: SortOrder
-    menuItemId?: SortOrder
-    orderId?: SortOrder
+    name?: SortOrder
+    priceTopping?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ToppingAvgOrderByAggregateInput = {
+    id?: SortOrder
+    priceTopping?: SortOrder
+  }
+
+  export type ToppingMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    priceTopping?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ToppingMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    priceTopping?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ToppingSumOrderByAggregateInput = {
+    id?: SortOrder
+    priceTopping?: SortOrder
+  }
+
+  export type OrderItemScalarRelationFilter = {
+    is?: OrderItemWhereInput
+    isNot?: OrderItemWhereInput
+  }
+
+  export type ToppingScalarRelationFilter = {
+    is?: ToppingWhereInput
+    isNot?: ToppingWhereInput
+  }
+
+  export type OrderItemToppingOrderItemIdToppingIdCompoundUniqueInput = {
+    orderItemId: number
+    toppingId: number
+  }
+
+  export type OrderItemToppingCountOrderByAggregateInput = {
+    orderItemId?: SortOrder
+    toppingId?: SortOrder
+  }
+
+  export type OrderItemToppingAvgOrderByAggregateInput = {
+    orderItemId?: SortOrder
+    toppingId?: SortOrder
+  }
+
+  export type OrderItemToppingMaxOrderByAggregateInput = {
+    orderItemId?: SortOrder
+    toppingId?: SortOrder
+  }
+
+  export type OrderItemToppingMinOrderByAggregateInput = {
+    orderItemId?: SortOrder
+    toppingId?: SortOrder
+  }
+
+  export type OrderItemToppingSumOrderByAggregateInput = {
+    orderItemId?: SortOrder
+    toppingId?: SortOrder
   }
 
   export type OrderCreateNestedManyWithoutUserInput = {
@@ -6248,6 +8872,10 @@ export namespace Prisma {
 
   export type StringFieldUpdateOperationsInput = {
     set?: string
+  }
+
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
   export type EnumRoleFieldUpdateOperationsInput = {
@@ -6304,12 +8932,12 @@ export namespace Prisma {
     connect?: OrderItemWhereUniqueInput | OrderItemWhereUniqueInput[]
   }
 
-  export type FloatFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type OrderItemUpdateManyWithoutMenuItemNestedInput = {
@@ -6362,10 +8990,6 @@ export namespace Prisma {
 
   export type EnumOrderStatusFieldUpdateOperationsInput = {
     set?: $Enums.OrderStatus
-  }
-
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
   }
 
   export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -6424,10 +9048,24 @@ export namespace Prisma {
     connect?: MenuItemWhereUniqueInput
   }
 
-  export type OrderCreateNestedOneWithoutOrderitemInput = {
-    create?: XOR<OrderCreateWithoutOrderitemInput, OrderUncheckedCreateWithoutOrderitemInput>
-    connectOrCreate?: OrderCreateOrConnectWithoutOrderitemInput
+  export type OrderCreateNestedOneWithoutOrderItemsInput = {
+    create?: XOR<OrderCreateWithoutOrderItemsInput, OrderUncheckedCreateWithoutOrderItemsInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutOrderItemsInput
     connect?: OrderWhereUniqueInput
+  }
+
+  export type OrderItemToppingCreateNestedManyWithoutOrderItemsInput = {
+    create?: XOR<OrderItemToppingCreateWithoutOrderItemsInput, OrderItemToppingUncheckedCreateWithoutOrderItemsInput> | OrderItemToppingCreateWithoutOrderItemsInput[] | OrderItemToppingUncheckedCreateWithoutOrderItemsInput[]
+    connectOrCreate?: OrderItemToppingCreateOrConnectWithoutOrderItemsInput | OrderItemToppingCreateOrConnectWithoutOrderItemsInput[]
+    createMany?: OrderItemToppingCreateManyOrderItemsInputEnvelope
+    connect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+  }
+
+  export type OrderItemToppingUncheckedCreateNestedManyWithoutOrderItemsInput = {
+    create?: XOR<OrderItemToppingCreateWithoutOrderItemsInput, OrderItemToppingUncheckedCreateWithoutOrderItemsInput> | OrderItemToppingCreateWithoutOrderItemsInput[] | OrderItemToppingUncheckedCreateWithoutOrderItemsInput[]
+    connectOrCreate?: OrderItemToppingCreateOrConnectWithoutOrderItemsInput | OrderItemToppingCreateOrConnectWithoutOrderItemsInput[]
+    createMany?: OrderItemToppingCreateManyOrderItemsInputEnvelope
+    connect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
   }
 
   export type MenuItemUpdateOneWithoutOrderItemsNestedInput = {
@@ -6440,14 +9078,112 @@ export namespace Prisma {
     update?: XOR<XOR<MenuItemUpdateToOneWithWhereWithoutOrderItemsInput, MenuItemUpdateWithoutOrderItemsInput>, MenuItemUncheckedUpdateWithoutOrderItemsInput>
   }
 
-  export type OrderUpdateOneWithoutOrderitemNestedInput = {
-    create?: XOR<OrderCreateWithoutOrderitemInput, OrderUncheckedCreateWithoutOrderitemInput>
-    connectOrCreate?: OrderCreateOrConnectWithoutOrderitemInput
-    upsert?: OrderUpsertWithoutOrderitemInput
+  export type OrderUpdateOneWithoutOrderItemsNestedInput = {
+    create?: XOR<OrderCreateWithoutOrderItemsInput, OrderUncheckedCreateWithoutOrderItemsInput>
+    connectOrCreate?: OrderCreateOrConnectWithoutOrderItemsInput
+    upsert?: OrderUpsertWithoutOrderItemsInput
     disconnect?: OrderWhereInput | boolean
     delete?: OrderWhereInput | boolean
     connect?: OrderWhereUniqueInput
-    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutOrderitemInput, OrderUpdateWithoutOrderitemInput>, OrderUncheckedUpdateWithoutOrderitemInput>
+    update?: XOR<XOR<OrderUpdateToOneWithWhereWithoutOrderItemsInput, OrderUpdateWithoutOrderItemsInput>, OrderUncheckedUpdateWithoutOrderItemsInput>
+  }
+
+  export type OrderItemToppingUpdateManyWithoutOrderItemsNestedInput = {
+    create?: XOR<OrderItemToppingCreateWithoutOrderItemsInput, OrderItemToppingUncheckedCreateWithoutOrderItemsInput> | OrderItemToppingCreateWithoutOrderItemsInput[] | OrderItemToppingUncheckedCreateWithoutOrderItemsInput[]
+    connectOrCreate?: OrderItemToppingCreateOrConnectWithoutOrderItemsInput | OrderItemToppingCreateOrConnectWithoutOrderItemsInput[]
+    upsert?: OrderItemToppingUpsertWithWhereUniqueWithoutOrderItemsInput | OrderItemToppingUpsertWithWhereUniqueWithoutOrderItemsInput[]
+    createMany?: OrderItemToppingCreateManyOrderItemsInputEnvelope
+    set?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    disconnect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    delete?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    connect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    update?: OrderItemToppingUpdateWithWhereUniqueWithoutOrderItemsInput | OrderItemToppingUpdateWithWhereUniqueWithoutOrderItemsInput[]
+    updateMany?: OrderItemToppingUpdateManyWithWhereWithoutOrderItemsInput | OrderItemToppingUpdateManyWithWhereWithoutOrderItemsInput[]
+    deleteMany?: OrderItemToppingScalarWhereInput | OrderItemToppingScalarWhereInput[]
+  }
+
+  export type OrderItemToppingUncheckedUpdateManyWithoutOrderItemsNestedInput = {
+    create?: XOR<OrderItemToppingCreateWithoutOrderItemsInput, OrderItemToppingUncheckedCreateWithoutOrderItemsInput> | OrderItemToppingCreateWithoutOrderItemsInput[] | OrderItemToppingUncheckedCreateWithoutOrderItemsInput[]
+    connectOrCreate?: OrderItemToppingCreateOrConnectWithoutOrderItemsInput | OrderItemToppingCreateOrConnectWithoutOrderItemsInput[]
+    upsert?: OrderItemToppingUpsertWithWhereUniqueWithoutOrderItemsInput | OrderItemToppingUpsertWithWhereUniqueWithoutOrderItemsInput[]
+    createMany?: OrderItemToppingCreateManyOrderItemsInputEnvelope
+    set?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    disconnect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    delete?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    connect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    update?: OrderItemToppingUpdateWithWhereUniqueWithoutOrderItemsInput | OrderItemToppingUpdateWithWhereUniqueWithoutOrderItemsInput[]
+    updateMany?: OrderItemToppingUpdateManyWithWhereWithoutOrderItemsInput | OrderItemToppingUpdateManyWithWhereWithoutOrderItemsInput[]
+    deleteMany?: OrderItemToppingScalarWhereInput | OrderItemToppingScalarWhereInput[]
+  }
+
+  export type OrderItemToppingCreateNestedManyWithoutToppingInput = {
+    create?: XOR<OrderItemToppingCreateWithoutToppingInput, OrderItemToppingUncheckedCreateWithoutToppingInput> | OrderItemToppingCreateWithoutToppingInput[] | OrderItemToppingUncheckedCreateWithoutToppingInput[]
+    connectOrCreate?: OrderItemToppingCreateOrConnectWithoutToppingInput | OrderItemToppingCreateOrConnectWithoutToppingInput[]
+    createMany?: OrderItemToppingCreateManyToppingInputEnvelope
+    connect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+  }
+
+  export type OrderItemToppingUncheckedCreateNestedManyWithoutToppingInput = {
+    create?: XOR<OrderItemToppingCreateWithoutToppingInput, OrderItemToppingUncheckedCreateWithoutToppingInput> | OrderItemToppingCreateWithoutToppingInput[] | OrderItemToppingUncheckedCreateWithoutToppingInput[]
+    connectOrCreate?: OrderItemToppingCreateOrConnectWithoutToppingInput | OrderItemToppingCreateOrConnectWithoutToppingInput[]
+    createMany?: OrderItemToppingCreateManyToppingInputEnvelope
+    connect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+  }
+
+  export type OrderItemToppingUpdateManyWithoutToppingNestedInput = {
+    create?: XOR<OrderItemToppingCreateWithoutToppingInput, OrderItemToppingUncheckedCreateWithoutToppingInput> | OrderItemToppingCreateWithoutToppingInput[] | OrderItemToppingUncheckedCreateWithoutToppingInput[]
+    connectOrCreate?: OrderItemToppingCreateOrConnectWithoutToppingInput | OrderItemToppingCreateOrConnectWithoutToppingInput[]
+    upsert?: OrderItemToppingUpsertWithWhereUniqueWithoutToppingInput | OrderItemToppingUpsertWithWhereUniqueWithoutToppingInput[]
+    createMany?: OrderItemToppingCreateManyToppingInputEnvelope
+    set?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    disconnect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    delete?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    connect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    update?: OrderItemToppingUpdateWithWhereUniqueWithoutToppingInput | OrderItemToppingUpdateWithWhereUniqueWithoutToppingInput[]
+    updateMany?: OrderItemToppingUpdateManyWithWhereWithoutToppingInput | OrderItemToppingUpdateManyWithWhereWithoutToppingInput[]
+    deleteMany?: OrderItemToppingScalarWhereInput | OrderItemToppingScalarWhereInput[]
+  }
+
+  export type OrderItemToppingUncheckedUpdateManyWithoutToppingNestedInput = {
+    create?: XOR<OrderItemToppingCreateWithoutToppingInput, OrderItemToppingUncheckedCreateWithoutToppingInput> | OrderItemToppingCreateWithoutToppingInput[] | OrderItemToppingUncheckedCreateWithoutToppingInput[]
+    connectOrCreate?: OrderItemToppingCreateOrConnectWithoutToppingInput | OrderItemToppingCreateOrConnectWithoutToppingInput[]
+    upsert?: OrderItemToppingUpsertWithWhereUniqueWithoutToppingInput | OrderItemToppingUpsertWithWhereUniqueWithoutToppingInput[]
+    createMany?: OrderItemToppingCreateManyToppingInputEnvelope
+    set?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    disconnect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    delete?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    connect?: OrderItemToppingWhereUniqueInput | OrderItemToppingWhereUniqueInput[]
+    update?: OrderItemToppingUpdateWithWhereUniqueWithoutToppingInput | OrderItemToppingUpdateWithWhereUniqueWithoutToppingInput[]
+    updateMany?: OrderItemToppingUpdateManyWithWhereWithoutToppingInput | OrderItemToppingUpdateManyWithWhereWithoutToppingInput[]
+    deleteMany?: OrderItemToppingScalarWhereInput | OrderItemToppingScalarWhereInput[]
+  }
+
+  export type OrderItemCreateNestedOneWithoutOrderItemToppingsInput = {
+    create?: XOR<OrderItemCreateWithoutOrderItemToppingsInput, OrderItemUncheckedCreateWithoutOrderItemToppingsInput>
+    connectOrCreate?: OrderItemCreateOrConnectWithoutOrderItemToppingsInput
+    connect?: OrderItemWhereUniqueInput
+  }
+
+  export type ToppingCreateNestedOneWithoutOrderItemToppingsInput = {
+    create?: XOR<ToppingCreateWithoutOrderItemToppingsInput, ToppingUncheckedCreateWithoutOrderItemToppingsInput>
+    connectOrCreate?: ToppingCreateOrConnectWithoutOrderItemToppingsInput
+    connect?: ToppingWhereUniqueInput
+  }
+
+  export type OrderItemUpdateOneRequiredWithoutOrderItemToppingsNestedInput = {
+    create?: XOR<OrderItemCreateWithoutOrderItemToppingsInput, OrderItemUncheckedCreateWithoutOrderItemToppingsInput>
+    connectOrCreate?: OrderItemCreateOrConnectWithoutOrderItemToppingsInput
+    upsert?: OrderItemUpsertWithoutOrderItemToppingsInput
+    connect?: OrderItemWhereUniqueInput
+    update?: XOR<XOR<OrderItemUpdateToOneWithWhereWithoutOrderItemToppingsInput, OrderItemUpdateWithoutOrderItemToppingsInput>, OrderItemUncheckedUpdateWithoutOrderItemToppingsInput>
+  }
+
+  export type ToppingUpdateOneRequiredWithoutOrderItemToppingsNestedInput = {
+    create?: XOR<ToppingCreateWithoutOrderItemToppingsInput, ToppingUncheckedCreateWithoutOrderItemToppingsInput>
+    connectOrCreate?: ToppingCreateOrConnectWithoutOrderItemToppingsInput
+    upsert?: ToppingUpsertWithoutOrderItemToppingsInput
+    connect?: ToppingWhereUniqueInput
+    update?: XOR<XOR<ToppingUpdateToOneWithWhereWithoutOrderItemToppingsInput, ToppingUpdateWithoutOrderItemToppingsInput>, ToppingUncheckedUpdateWithoutOrderItemToppingsInput>
   }
 
   export type NestedIntFilter<$PrismaModel = never> = {
@@ -6474,6 +9210,17 @@ export namespace Prisma {
     endsWith?: string | StringFieldRefInput<$PrismaModel>
     search?: string
     not?: NestedStringFilter<$PrismaModel> | string
+  }
+
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedEnumRoleFilter<$PrismaModel = never> = {
@@ -6528,6 +9275,20 @@ export namespace Prisma {
     _max?: NestedStringFilter<$PrismaModel>
   }
 
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[]
+    notIn?: Date[] | string[]
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
   export type NestedEnumRoleWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.Role | EnumRoleFieldRefInput<$PrismaModel>
     in?: $Enums.Role[]
@@ -6538,20 +9299,31 @@ export namespace Prisma {
     _max?: NestedEnumRoleFilter<$PrismaModel>
   }
 
-  export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[]
-    notIn?: number[]
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatWithAggregatesFilter<$PrismaModel> | number
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[]
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedFloatFilter<$PrismaModel>
-    _min?: NestedFloatFilter<$PrismaModel>
-    _max?: NestedFloatFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
   }
 
   export type NestedEnumOrderStatusFilter<$PrismaModel = never> = {
@@ -6559,17 +9331,6 @@ export namespace Prisma {
     in?: $Enums.OrderStatus[]
     notIn?: $Enums.OrderStatus[]
     not?: NestedEnumOrderStatusFilter<$PrismaModel> | $Enums.OrderStatus
-  }
-
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -6602,20 +9363,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumOrderStatusFilter<$PrismaModel>
     _max?: NestedEnumOrderStatusFilter<$PrismaModel>
-  }
-
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[]
-    notIn?: Date[] | string[]
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
   export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -6661,19 +9408,19 @@ export namespace Prisma {
 
   export type OrderCreateWithoutUserInput = {
     status?: $Enums.OrderStatus
-    totalPrice: number
+    totalPrice: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     completedAt?: Date | string | null
-    orderitem?: OrderItemCreateNestedManyWithoutOrderInput
+    orderItems?: OrderItemCreateNestedManyWithoutOrderInput
   }
 
   export type OrderUncheckedCreateWithoutUserInput = {
-    id?: number
+    order_id?: number
     status?: $Enums.OrderStatus
-    totalPrice: number
+    totalPrice: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     completedAt?: Date | string | null
-    orderitem?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
+    orderItems?: OrderItemUncheckedCreateNestedManyWithoutOrderInput
   }
 
   export type OrderCreateOrConnectWithoutUserInput = {
@@ -6706,25 +9453,31 @@ export namespace Prisma {
     AND?: OrderScalarWhereInput | OrderScalarWhereInput[]
     OR?: OrderScalarWhereInput[]
     NOT?: OrderScalarWhereInput | OrderScalarWhereInput[]
-    id?: IntFilter<"Order"> | number
+    order_id?: IntFilter<"Order"> | number
     status?: EnumOrderStatusFilter<"Order"> | $Enums.OrderStatus
-    totalPrice?: FloatFilter<"Order"> | number
+    totalPrice?: DecimalFilter<"Order"> | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFilter<"Order"> | Date | string
     completedAt?: DateTimeNullableFilter<"Order"> | Date | string | null
     userId?: IntNullableFilter<"Order"> | number | null
   }
 
   export type OrderItemCreateWithoutMenuItemInput = {
-    quantity: number
-    totalPriceItem: number
-    order?: OrderCreateNestedOneWithoutOrderitemInput
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    order?: OrderCreateNestedOneWithoutOrderItemsInput
+    orderItemToppings?: OrderItemToppingCreateNestedManyWithoutOrderItemsInput
   }
 
   export type OrderItemUncheckedCreateWithoutMenuItemInput = {
     id?: number
-    quantity: number
-    totalPriceItem: number
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
     orderId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orderItemToppings?: OrderItemToppingUncheckedCreateNestedManyWithoutOrderItemsInput
   }
 
   export type OrderItemCreateOrConnectWithoutMenuItemInput = {
@@ -6758,23 +9511,31 @@ export namespace Prisma {
     OR?: OrderItemScalarWhereInput[]
     NOT?: OrderItemScalarWhereInput | OrderItemScalarWhereInput[]
     id?: IntFilter<"OrderItem"> | number
-    quantity?: IntFilter<"OrderItem"> | number
-    totalPriceItem?: FloatFilter<"OrderItem"> | number
+    qty?: IntFilter<"OrderItem"> | number
+    totalPriceItem?: DecimalFilter<"OrderItem"> | Decimal | DecimalJsLike | number | string
     menuItemId?: IntNullableFilter<"OrderItem"> | number | null
     orderId?: IntNullableFilter<"OrderItem"> | number | null
+    createdAt?: DateTimeFilter<"OrderItem"> | Date | string
+    updatedAt?: DateTimeFilter<"OrderItem"> | Date | string
   }
 
   export type OrderItemCreateWithoutOrderInput = {
-    quantity: number
-    totalPriceItem: number
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     menuItem?: MenuItemCreateNestedOneWithoutOrderItemsInput
+    orderItemToppings?: OrderItemToppingCreateNestedManyWithoutOrderItemsInput
   }
 
   export type OrderItemUncheckedCreateWithoutOrderInput = {
     id?: number
-    quantity: number
-    totalPriceItem: number
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
     menuItemId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    orderItemToppings?: OrderItemToppingUncheckedCreateNestedManyWithoutOrderItemsInput
   }
 
   export type OrderItemCreateOrConnectWithoutOrderInput = {
@@ -6791,6 +9552,8 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     role?: $Enums.Role
   }
 
@@ -6799,6 +9562,8 @@ export namespace Prisma {
     name: string
     email: string
     password: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
     role?: $Enums.Role
   }
 
@@ -6838,6 +9603,8 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
@@ -6846,19 +9613,21 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     role?: EnumRoleFieldUpdateOperationsInput | $Enums.Role
   }
 
   export type MenuItemCreateWithoutOrderItemsInput = {
     name: string
-    price: number
+    price: Decimal | DecimalJsLike | number | string
     img: string
   }
 
   export type MenuItemUncheckedCreateWithoutOrderItemsInput = {
     item_id?: number
     name: string
-    price: number
+    price: Decimal | DecimalJsLike | number | string
     img: string
   }
 
@@ -6867,26 +9636,44 @@ export namespace Prisma {
     create: XOR<MenuItemCreateWithoutOrderItemsInput, MenuItemUncheckedCreateWithoutOrderItemsInput>
   }
 
-  export type OrderCreateWithoutOrderitemInput = {
+  export type OrderCreateWithoutOrderItemsInput = {
     status?: $Enums.OrderStatus
-    totalPrice: number
+    totalPrice: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     completedAt?: Date | string | null
     User?: UserCreateNestedOneWithoutOrdersInput
   }
 
-  export type OrderUncheckedCreateWithoutOrderitemInput = {
-    id?: number
+  export type OrderUncheckedCreateWithoutOrderItemsInput = {
+    order_id?: number
     status?: $Enums.OrderStatus
-    totalPrice: number
+    totalPrice: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     completedAt?: Date | string | null
     userId?: number | null
   }
 
-  export type OrderCreateOrConnectWithoutOrderitemInput = {
+  export type OrderCreateOrConnectWithoutOrderItemsInput = {
     where: OrderWhereUniqueInput
-    create: XOR<OrderCreateWithoutOrderitemInput, OrderUncheckedCreateWithoutOrderitemInput>
+    create: XOR<OrderCreateWithoutOrderItemsInput, OrderUncheckedCreateWithoutOrderItemsInput>
+  }
+
+  export type OrderItemToppingCreateWithoutOrderItemsInput = {
+    topping: ToppingCreateNestedOneWithoutOrderItemToppingsInput
+  }
+
+  export type OrderItemToppingUncheckedCreateWithoutOrderItemsInput = {
+    toppingId: number
+  }
+
+  export type OrderItemToppingCreateOrConnectWithoutOrderItemsInput = {
+    where: OrderItemToppingWhereUniqueInput
+    create: XOR<OrderItemToppingCreateWithoutOrderItemsInput, OrderItemToppingUncheckedCreateWithoutOrderItemsInput>
+  }
+
+  export type OrderItemToppingCreateManyOrderItemsInputEnvelope = {
+    data: OrderItemToppingCreateManyOrderItemsInput | OrderItemToppingCreateManyOrderItemsInput[]
+    skipDuplicates?: boolean
   }
 
   export type MenuItemUpsertWithoutOrderItemsInput = {
@@ -6902,130 +9689,340 @@ export namespace Prisma {
 
   export type MenuItemUpdateWithoutOrderItemsInput = {
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     img?: StringFieldUpdateOperationsInput | string
   }
 
   export type MenuItemUncheckedUpdateWithoutOrderItemsInput = {
     item_id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    price?: FloatFieldUpdateOperationsInput | number
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     img?: StringFieldUpdateOperationsInput | string
   }
 
-  export type OrderUpsertWithoutOrderitemInput = {
-    update: XOR<OrderUpdateWithoutOrderitemInput, OrderUncheckedUpdateWithoutOrderitemInput>
-    create: XOR<OrderCreateWithoutOrderitemInput, OrderUncheckedCreateWithoutOrderitemInput>
+  export type OrderUpsertWithoutOrderItemsInput = {
+    update: XOR<OrderUpdateWithoutOrderItemsInput, OrderUncheckedUpdateWithoutOrderItemsInput>
+    create: XOR<OrderCreateWithoutOrderItemsInput, OrderUncheckedCreateWithoutOrderItemsInput>
     where?: OrderWhereInput
   }
 
-  export type OrderUpdateToOneWithWhereWithoutOrderitemInput = {
+  export type OrderUpdateToOneWithWhereWithoutOrderItemsInput = {
     where?: OrderWhereInput
-    data: XOR<OrderUpdateWithoutOrderitemInput, OrderUncheckedUpdateWithoutOrderitemInput>
+    data: XOR<OrderUpdateWithoutOrderItemsInput, OrderUncheckedUpdateWithoutOrderItemsInput>
   }
 
-  export type OrderUpdateWithoutOrderitemInput = {
+  export type OrderUpdateWithoutOrderItemsInput = {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     User?: UserUpdateOneWithoutOrdersNestedInput
   }
 
-  export type OrderUncheckedUpdateWithoutOrderitemInput = {
-    id?: IntFieldUpdateOperationsInput | number
+  export type OrderUncheckedUpdateWithoutOrderItemsInput = {
+    order_id?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
-  export type OrderCreateManyUserInput = {
+  export type OrderItemToppingUpsertWithWhereUniqueWithoutOrderItemsInput = {
+    where: OrderItemToppingWhereUniqueInput
+    update: XOR<OrderItemToppingUpdateWithoutOrderItemsInput, OrderItemToppingUncheckedUpdateWithoutOrderItemsInput>
+    create: XOR<OrderItemToppingCreateWithoutOrderItemsInput, OrderItemToppingUncheckedCreateWithoutOrderItemsInput>
+  }
+
+  export type OrderItemToppingUpdateWithWhereUniqueWithoutOrderItemsInput = {
+    where: OrderItemToppingWhereUniqueInput
+    data: XOR<OrderItemToppingUpdateWithoutOrderItemsInput, OrderItemToppingUncheckedUpdateWithoutOrderItemsInput>
+  }
+
+  export type OrderItemToppingUpdateManyWithWhereWithoutOrderItemsInput = {
+    where: OrderItemToppingScalarWhereInput
+    data: XOR<OrderItemToppingUpdateManyMutationInput, OrderItemToppingUncheckedUpdateManyWithoutOrderItemsInput>
+  }
+
+  export type OrderItemToppingScalarWhereInput = {
+    AND?: OrderItemToppingScalarWhereInput | OrderItemToppingScalarWhereInput[]
+    OR?: OrderItemToppingScalarWhereInput[]
+    NOT?: OrderItemToppingScalarWhereInput | OrderItemToppingScalarWhereInput[]
+    orderItemId?: IntFilter<"OrderItemTopping"> | number
+    toppingId?: IntFilter<"OrderItemTopping"> | number
+  }
+
+  export type OrderItemToppingCreateWithoutToppingInput = {
+    orderItems: OrderItemCreateNestedOneWithoutOrderItemToppingsInput
+  }
+
+  export type OrderItemToppingUncheckedCreateWithoutToppingInput = {
+    orderItemId: number
+  }
+
+  export type OrderItemToppingCreateOrConnectWithoutToppingInput = {
+    where: OrderItemToppingWhereUniqueInput
+    create: XOR<OrderItemToppingCreateWithoutToppingInput, OrderItemToppingUncheckedCreateWithoutToppingInput>
+  }
+
+  export type OrderItemToppingCreateManyToppingInputEnvelope = {
+    data: OrderItemToppingCreateManyToppingInput | OrderItemToppingCreateManyToppingInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type OrderItemToppingUpsertWithWhereUniqueWithoutToppingInput = {
+    where: OrderItemToppingWhereUniqueInput
+    update: XOR<OrderItemToppingUpdateWithoutToppingInput, OrderItemToppingUncheckedUpdateWithoutToppingInput>
+    create: XOR<OrderItemToppingCreateWithoutToppingInput, OrderItemToppingUncheckedCreateWithoutToppingInput>
+  }
+
+  export type OrderItemToppingUpdateWithWhereUniqueWithoutToppingInput = {
+    where: OrderItemToppingWhereUniqueInput
+    data: XOR<OrderItemToppingUpdateWithoutToppingInput, OrderItemToppingUncheckedUpdateWithoutToppingInput>
+  }
+
+  export type OrderItemToppingUpdateManyWithWhereWithoutToppingInput = {
+    where: OrderItemToppingScalarWhereInput
+    data: XOR<OrderItemToppingUpdateManyMutationInput, OrderItemToppingUncheckedUpdateManyWithoutToppingInput>
+  }
+
+  export type OrderItemCreateWithoutOrderItemToppingsInput = {
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    menuItem?: MenuItemCreateNestedOneWithoutOrderItemsInput
+    order?: OrderCreateNestedOneWithoutOrderItemsInput
+  }
+
+  export type OrderItemUncheckedCreateWithoutOrderItemToppingsInput = {
     id?: number
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
+    menuItemId?: number | null
+    orderId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type OrderItemCreateOrConnectWithoutOrderItemToppingsInput = {
+    where: OrderItemWhereUniqueInput
+    create: XOR<OrderItemCreateWithoutOrderItemToppingsInput, OrderItemUncheckedCreateWithoutOrderItemToppingsInput>
+  }
+
+  export type ToppingCreateWithoutOrderItemToppingsInput = {
+    name: string
+    priceTopping: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ToppingUncheckedCreateWithoutOrderItemToppingsInput = {
+    id?: number
+    name: string
+    priceTopping: Decimal | DecimalJsLike | number | string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ToppingCreateOrConnectWithoutOrderItemToppingsInput = {
+    where: ToppingWhereUniqueInput
+    create: XOR<ToppingCreateWithoutOrderItemToppingsInput, ToppingUncheckedCreateWithoutOrderItemToppingsInput>
+  }
+
+  export type OrderItemUpsertWithoutOrderItemToppingsInput = {
+    update: XOR<OrderItemUpdateWithoutOrderItemToppingsInput, OrderItemUncheckedUpdateWithoutOrderItemToppingsInput>
+    create: XOR<OrderItemCreateWithoutOrderItemToppingsInput, OrderItemUncheckedCreateWithoutOrderItemToppingsInput>
+    where?: OrderItemWhereInput
+  }
+
+  export type OrderItemUpdateToOneWithWhereWithoutOrderItemToppingsInput = {
+    where?: OrderItemWhereInput
+    data: XOR<OrderItemUpdateWithoutOrderItemToppingsInput, OrderItemUncheckedUpdateWithoutOrderItemToppingsInput>
+  }
+
+  export type OrderItemUpdateWithoutOrderItemToppingsInput = {
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    menuItem?: MenuItemUpdateOneWithoutOrderItemsNestedInput
+    order?: OrderUpdateOneWithoutOrderItemsNestedInput
+  }
+
+  export type OrderItemUncheckedUpdateWithoutOrderItemToppingsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    menuItemId?: NullableIntFieldUpdateOperationsInput | number | null
+    orderId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ToppingUpsertWithoutOrderItemToppingsInput = {
+    update: XOR<ToppingUpdateWithoutOrderItemToppingsInput, ToppingUncheckedUpdateWithoutOrderItemToppingsInput>
+    create: XOR<ToppingCreateWithoutOrderItemToppingsInput, ToppingUncheckedCreateWithoutOrderItemToppingsInput>
+    where?: ToppingWhereInput
+  }
+
+  export type ToppingUpdateToOneWithWhereWithoutOrderItemToppingsInput = {
+    where?: ToppingWhereInput
+    data: XOR<ToppingUpdateWithoutOrderItemToppingsInput, ToppingUncheckedUpdateWithoutOrderItemToppingsInput>
+  }
+
+  export type ToppingUpdateWithoutOrderItemToppingsInput = {
+    name?: StringFieldUpdateOperationsInput | string
+    priceTopping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ToppingUncheckedUpdateWithoutOrderItemToppingsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    priceTopping?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderCreateManyUserInput = {
+    order_id?: number
     status?: $Enums.OrderStatus
-    totalPrice: number
+    totalPrice: Decimal | DecimalJsLike | number | string
     createdAt?: Date | string
     completedAt?: Date | string | null
   }
 
   export type OrderUpdateWithoutUserInput = {
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    orderitem?: OrderItemUpdateManyWithoutOrderNestedInput
+    orderItems?: OrderItemUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    order_id?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    orderitem?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
+    orderItems?: OrderItemUncheckedUpdateManyWithoutOrderNestedInput
   }
 
   export type OrderUncheckedUpdateManyWithoutUserInput = {
-    id?: IntFieldUpdateOperationsInput | number
+    order_id?: IntFieldUpdateOperationsInput | number
     status?: EnumOrderStatusFieldUpdateOperationsInput | $Enums.OrderStatus
-    totalPrice?: FloatFieldUpdateOperationsInput | number
+    totalPrice?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     completedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   }
 
   export type OrderItemCreateManyMenuItemInput = {
     id?: number
-    quantity: number
-    totalPriceItem: number
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
     orderId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type OrderItemUpdateWithoutMenuItemInput = {
-    quantity?: IntFieldUpdateOperationsInput | number
-    totalPriceItem?: FloatFieldUpdateOperationsInput | number
-    order?: OrderUpdateOneWithoutOrderitemNestedInput
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    order?: OrderUpdateOneWithoutOrderItemsNestedInput
+    orderItemToppings?: OrderItemToppingUpdateManyWithoutOrderItemsNestedInput
   }
 
   export type OrderItemUncheckedUpdateWithoutMenuItemInput = {
     id?: IntFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
-    totalPriceItem?: FloatFieldUpdateOperationsInput | number
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     orderId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orderItemToppings?: OrderItemToppingUncheckedUpdateManyWithoutOrderItemsNestedInput
   }
 
   export type OrderItemUncheckedUpdateManyWithoutMenuItemInput = {
     id?: IntFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
-    totalPriceItem?: FloatFieldUpdateOperationsInput | number
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     orderId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type OrderItemCreateManyOrderInput = {
     id?: number
-    quantity: number
-    totalPriceItem: number
+    qty: number
+    totalPriceItem: Decimal | DecimalJsLike | number | string
     menuItemId?: number | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type OrderItemUpdateWithoutOrderInput = {
-    quantity?: IntFieldUpdateOperationsInput | number
-    totalPriceItem?: FloatFieldUpdateOperationsInput | number
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     menuItem?: MenuItemUpdateOneWithoutOrderItemsNestedInput
+    orderItemToppings?: OrderItemToppingUpdateManyWithoutOrderItemsNestedInput
   }
 
   export type OrderItemUncheckedUpdateWithoutOrderInput = {
     id?: IntFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
-    totalPriceItem?: FloatFieldUpdateOperationsInput | number
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     menuItemId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    orderItemToppings?: OrderItemToppingUncheckedUpdateManyWithoutOrderItemsNestedInput
   }
 
   export type OrderItemUncheckedUpdateManyWithoutOrderInput = {
     id?: IntFieldUpdateOperationsInput | number
-    quantity?: IntFieldUpdateOperationsInput | number
-    totalPriceItem?: FloatFieldUpdateOperationsInput | number
+    qty?: IntFieldUpdateOperationsInput | number
+    totalPriceItem?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     menuItemId?: NullableIntFieldUpdateOperationsInput | number | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type OrderItemToppingCreateManyOrderItemsInput = {
+    toppingId: number
+  }
+
+  export type OrderItemToppingUpdateWithoutOrderItemsInput = {
+    topping?: ToppingUpdateOneRequiredWithoutOrderItemToppingsNestedInput
+  }
+
+  export type OrderItemToppingUncheckedUpdateWithoutOrderItemsInput = {
+    toppingId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type OrderItemToppingUncheckedUpdateManyWithoutOrderItemsInput = {
+    toppingId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type OrderItemToppingCreateManyToppingInput = {
+    orderItemId: number
+  }
+
+  export type OrderItemToppingUpdateWithoutToppingInput = {
+    orderItems?: OrderItemUpdateOneRequiredWithoutOrderItemToppingsNestedInput
+  }
+
+  export type OrderItemToppingUncheckedUpdateWithoutToppingInput = {
+    orderItemId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type OrderItemToppingUncheckedUpdateManyWithoutToppingInput = {
+    orderItemId?: IntFieldUpdateOperationsInput | number
   }
 
 
