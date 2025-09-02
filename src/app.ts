@@ -11,7 +11,12 @@ import { orderRouter } from './router/order.router';
 
 const app: Application = express() //Application เพื่อ autocomplete และ error hint จาก Express
 
-app.use(cors())
+app.use(cors({
+  origin: "http://localhost:5173", 
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
+}))
+
 app.use(express.json());
 app.use('/api',authRouter)
 app.use('/api',baristaRouter)
