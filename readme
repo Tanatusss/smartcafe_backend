@@ -17,3 +17,5 @@ pnpm add cors
 pnpm add -D @types/cors
 npx prisma db seed (เพื่อใส่ข้อมูลmenu10ชนิด)
 pnpm add -D @types/node
+pnpm add morgan
+pnpm add -D @types/morgan @types/node

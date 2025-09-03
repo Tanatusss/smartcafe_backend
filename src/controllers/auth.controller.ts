@@ -46,9 +46,13 @@ import { envConfig } from "../config/env.config";
     throw new HttpError('Invalid email or password', 401);
   }
 
-  const payload: UserPayload = {id: user.id, email: user.email, role: user.role}
-  const access_token = jwt.sign(payload, envConfig.JWT_SECRET, {
+  const payload: UserPayload = {id: user.id, email: user.email, role: user.role, name: user.name}
+  const token = jwt.sign(payload, envConfig.JWT_SECRET, {
     expiresIn: envConfig.JWT_EXPIRES
   })
-  res.status(200).json({access_token, expires_in: envConfig.JWT_EXPIRES})
+  
+  res.status(200).json({
+    token,
+    expires_in: envConfig.JWT_EXPIRES
+  })
 }

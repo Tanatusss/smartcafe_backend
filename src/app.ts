@@ -7,17 +7,19 @@ import cors from 'cors';
 import { baristaRouter } from './router/barista.router';
 import { publicRouter } from './router/public.router';
 import { orderRouter } from './router/order.router';
-
+import morgan from 'morgan';
 
 const app: Application = express() //Application เพื่อ autocomplete และ error hint จาก Express
 
 app.use(cors({
   origin: "http://localhost:5173", 
-  methods: ["GET", "POST", "PUT", "DELETE"],
   credentials: true
 }))
 
+
 app.use(express.json());
+
+app.use(morgan('dev'));
 app.use('/api',authRouter)
 app.use('/api',baristaRouter)
 app.use('/api',publicRouter)
