@@ -1,21 +1,91 @@
-pnpm init
-pnpm add express
-git init
-.gitignore (node_modules)
-pnpm add -D typescript @types/express
-pnpm tsc --init
-pnpm add -D ts-node nodemon
-pnpm add dotenv
-pnpm add zod
-pnpm add jsonwebtoken
-pnpm add @types/jsonwebtoken --dev
-pnpm add prisma @prisma/client
-pnpm prisma init
-pnpm prisma migrate dev --name init
-pnpm prisma migrate dev --name ชื่อที่ต้องการตั้ง (สำหรับแก้ไขschema)
-pnpm add cors
-pnpm add -D @types/cors
-npx prisma db seed (เพื่อใส่ข้อมูลmenu10ชนิด)
-pnpm add -D @types/node
-pnpm add morgan
-pnpm add -D @types/morgan @types/node
+# SmartCafé — Backend
+
+Tech Stack
+-Node.js + Express + Tyscript
+-Prisma ORM 
+-Zod (validate)
+-JWT (auth), bcrypt (hash)
+-CORS, dotenv
+-Morgan (log)
+-Nodemon (dev)
+
+Requirements
+- Node.js **>= 18**
+- pnpm / npm / yarn (ตัวอย่างใช้ **pnpm**)
+- Database (MySQL)
+
+Environment Variables
+สร้าง .env
+PORT = 3000
+
+DATABASE_URL="mysql://user:password@localhost:3306/smartcafe_api"
+
+JWT_SECRET="your-very-secret-key"
+JWT_EXPIRES="3600"
+
+
+
+Development
+- pnpm i
+- pnpm prisma generate
+- pnpm prisma migrate dev
+- pnpm prisma db seed
+- pnpm add -D tsx
+
+แก้ไขไฟล์ package.json
+{
+  "scripts": {
+    "dev": "tsx watch src/app.ts",
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/app.js",
+    "prod": "pnpm build && pnpm start"
+  }
+}
+
+- pnpm dev        # รัน nodemon src/app.ts
+# เปิด http://localhost:3000
+
+
+API ENDPOINT
+-POST /api/register
+-POST /api/authen
+-POST /api/addmenu
+-GET /api/menu
+-POST /api/order
+-GET /api/order/:id
+-GET /api/allorder
+-PATCH /api/order/:id/status
+
+
+
+
+
+
+
+
+
+
+
+
+คำสั่งที่ใช้ติดตั้งทั้งหมด
+; pnpm init
+; pnpm add express
+; git init
+; .gitignore (node_modules)
+; pnpm add -D typescript @types/express
+; pnpm tsc --init
+; pnpm add -D ts-node nodemon
+; pnpm add dotenv
+; pnpm add zod
+; pnpm add jsonwebtoken
+; pnpm add @types/jsonwebtoken --dev
+; pnpm add prisma @prisma/client
+; pnpm prisma init
+; pnpm prisma migrate dev --name init
+; pnpm prisma migrate dev --name ชื่อที่ต้องการตั้ง (สำหรับแก้ไขschema)
+; pnpm add cors
+; pnpm add -D @types/cors
+; npx prisma db seed (เพื่อใส่ข้อมูลmenu10ชนิด)
+; pnpm add -D @types/node
+; pnpm add morgan
+; pnpm add -D @types/morgan @types/node
