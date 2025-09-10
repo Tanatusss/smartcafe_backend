@@ -1,4 +1,4 @@
-import { CreateOrderSchema } from './../validators/order.validator';
+import { CreateOrderSchema, validateCreateOrder } from './../validators/order.validator';
 
 import { Router } from 'express';
 import { validate } from '../middlewares/validate.middleware';
@@ -8,7 +8,7 @@ import { authenticateMiddleware } from '../middlewares/auth.middleware';
 
 
 const  orderRouter: Router = Router();
-orderRouter.post('/order',authenticateMiddleware,validate(CreateOrderSchema),createOrder)
+orderRouter.post('/order',authenticateMiddleware,validateCreateOrder,createOrder)
 orderRouter.get('/order/:id',authenticateMiddleware,getOrderById)
 
 export {orderRouter}

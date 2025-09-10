@@ -5,6 +5,7 @@ import { HttpError } from "../utils/http-error";
 
 
 export const validate = 
+//<T> generic type schema
 <T>(schema: ZodType<T>) => (req:Request, res:Response, next:NextFunction) => {
    const {success, error, data} = schema.safeParse(req.body);
    if(!success){

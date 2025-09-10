@@ -18,6 +18,7 @@ import { envConfig } from "../config/env.config";
     throw new HttpError('Email already exists', 409);
   }
 
+  //เข้ารหัส password ด้วย bcrypt (salt 10 รอบ)
   data.password = await bcrypt.hash(data.password,10)
   await prisma.user.create({
     data:{
@@ -41,11 +42,13 @@ import { envConfig } from "../config/env.config";
     throw new HttpError('Invalid email or password', 401);
   }
 
+  //เทียบว่ารหัสต้องกับdataไหม
    const isValidPassword = await bcrypt.compare(data.password, user.password)
   if (!isValidPassword) {
     throw new HttpError('Invalid email or password', 401);
   }
 
+  //สร้าง token และกำหนดวันหมดอายุ
   const payload: UserPayload = {id: user.id, email: user.email, role: user.role, name: user.name}
   const token = jwt.sign(payload, envConfig.JWT_SECRET, {
     expiresIn: envConfig.JWT_EXPIRES

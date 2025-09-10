@@ -13,7 +13,7 @@ const app: Application = express() //Application เพื่อ autocomplete �
 
 app.use(cors({
   origin: "http://localhost:5173", 
-  credentials: true
+  // credentials: true
 }))
 
 
@@ -25,8 +25,8 @@ app.use('/api',baristaRouter)
 app.use('/api',publicRouter)
 app.use('/api',orderRouter)
 
-app.use(notFoundMiddleware)
-app.use(errorMiddleware)
+app.use(notFoundMiddleware)  // ถ้าไม่มี route จะเข้า -> notFoundMiddleware
+app.use(errorMiddleware)   //throw error หรือ next(error) -> errorMiddleware
 
 
 const port: number = envConfig.PORT;

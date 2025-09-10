@@ -9,14 +9,16 @@ const signUpSchema = z.object({
     name: z.string().min(2).max(25)
 })
 .refine(data => data.password === data.confirmPassword)
-.transform(({confirmPassword, ...rest})=> rest);
+.transform(({confirmPassword, ...rest})=> rest); 
+//เอาconfirmPassword ออกเมื่อเช็คเสร็จแล้ว
 
 export type RegisterValidator = z.infer<typeof signUpSchema>;
+//infer เอา type ออกมา เวลานำไปใช้จะได้ไม่ต้องเรียกtype ใหม่
 export const validateRegister = validate(signUpSchema);
 
 const signInSchema = z.object({
     email: z.email(),
-    password: z.string()
+    password: z.string().min(6)
 })
 
 export type LoginValidator = z.infer<typeof signInSchema>;

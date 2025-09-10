@@ -4,12 +4,12 @@ import 'dotenv/config'
 const envSchema = z.object({
   PORT: z.coerce.number().min(0).max(65535),
   DATABASE_URL: z.url(),
-  JWT_SECRET: z.string().min(32),
+  JWT_SECRET: z.string().min(1),
   JWT_EXPIRES: z.coerce.number().min(1)
 
 })
-
-const {success, data , error} = envSchema.safeParse(process.env)
+//นำค่าจาก .env มาเช็คกับ schema 
+const {success, data , error} = envSchema.safeParse(process.env) 
 if(!success){
   console.log(z.flattenError(error))
  throw new Error('Invalid environment variables')

@@ -13,6 +13,7 @@ export const CreateOrderSchema = z.object({
 });
 
 export type CreateOrderDTO = z.infer<typeof CreateOrderSchema>;
+export const validateCreateOrder = validate(CreateOrderSchema);
 
 export const UpdateOrderStatusSchema = z.object({
   status: z.enum(["PENDING", "PREPARING", "READY", "COMPLETED", "CANCELED"]),
